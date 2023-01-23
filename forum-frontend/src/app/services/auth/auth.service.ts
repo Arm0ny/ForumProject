@@ -9,10 +9,6 @@ export class AuthService {
   baseUrl = 'http://127.0.0.1:8000';
 
   options = {
-    headers: new HttpHeaders({
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    }),
     withCredentials: true,
   };
   constructor(private http: HttpClient) {}
@@ -27,7 +23,7 @@ export class AuthService {
             { email, password, remember: true },
             this.options
           )
-        )
+        ),
       );
   }
 
@@ -43,5 +39,9 @@ export class AuthService {
           )
         )
       );
+  }
+
+  getUser(){
+    return this.http.get(this.baseUrl + '/api/user');
   }
 }

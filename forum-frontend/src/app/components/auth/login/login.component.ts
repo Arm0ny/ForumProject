@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import {CookieService} from "ngx-cookie-service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import {CookieService} from "ngx-cookie-service";
   styleUrls: ['./login.component.sass'],
 })
 export class LoginComponent {
-  constructor(private authService: AuthService, private cookieService : CookieService) {}
+  constructor(private authService: AuthService, private router : Router) {}
   loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl(''),
@@ -19,7 +20,7 @@ export class LoginComponent {
     let email = this.loginForm.get('email')?.getRawValue();
     let password = this.loginForm.get('password')?.getRawValue();
     this.authService.login(email, password).subscribe(
-      (res) => console.log(res),
+      (res) => this.router.navigate(['home']),
       (err) => {
         console.error(err);
       }

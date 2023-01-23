@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule, HttpXsrfTokenExtractor} from '@angular/common/http';
-import { HeadersInterceptor } from './interceptors/headers.interceptor';
+import { SetCsrfInterceptor } from './interceptors/setCsrf.interceptor';
 import {CookieService} from "ngx-cookie-service";
 import { RegisterComponent } from './components/auth/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import {SetHeadersInterceptor} from "./interceptors/set-headers.interceptor";
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,7 +22,8 @@ import { RegisterComponent } from './components/auth/register/register.component
     ReactiveFormsModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SetHeadersInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: SetCsrfInterceptor, multi: true },
     CookieService,
   ],
   bootstrap: [AppComponent],

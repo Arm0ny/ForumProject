@@ -18,6 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth:sanctum')->get('/home', function (){
-    return Redirect::away('http://127.0.0.1:4200');
-});
+
