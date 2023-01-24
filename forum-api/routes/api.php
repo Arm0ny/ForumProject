@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,5 +27,7 @@ Route::prefix('questions')->group(function () {
     Route::get('/category/{categoryId}', [QuestionController::class, 'getByCategoryId']);
     Route::get('/user/{userId}/category/{categoryId}', [QuestionController::class, 'getByUserIdAndCategoryId']);
 });
+
+Route::resource('categories', CategoryController::class);
 
 

@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Question;
-use App\Models\User;
 use Illuminate\Http\Request;
 
-class QuestionController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return response(Question::all());
+        return Category::all();
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -28,51 +25,40 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        return(Question::create($request->all()));
+        return Category::create($request->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        return response(Question::findOrFail($id));
+        //
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        $question =  Question::find($id);
-        return response(Question::update($request->all()));
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        return response(Question::destroy($id));
-    }
-
-    public function getByUserId($userId){
-        $questions = User::find($userId)->questions;
-        return response($questions);
-    }
-
-    public function getByCategoryId($categoryId) {
-        return Category::find($categoryId)->questions;
+        //
     }
 }
