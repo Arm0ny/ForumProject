@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -13,18 +15,9 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        return response(Question::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +27,7 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return(Question::create($request->all()));
     }
 
     /**
@@ -45,19 +38,9 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        return response(Question::findOrFail($id));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -68,7 +51,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question =  Question::find($id);
+        return response(Question::update($request->all()));
     }
 
     /**
@@ -79,6 +63,11 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return response(Question::destroy($id));
+    }
+
+    public function getByUserId($userId){
+        $questions = User::find($userId)->questions;
+        return response($questions);
     }
 }
