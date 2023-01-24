@@ -67,10 +67,23 @@ class QuestionController extends Controller
         return response(Question::destroy($id));
     }
 
+    /**
+     * Get Questions by the user_id foreign key
+     *
+     *@param int $userId
+     */
+
     public function getByUserId($userId){
         $questions = User::find($userId)->questions;
         return response($questions);
     }
+
+    /**
+     * Get Questions by their category_id foreign key
+     *
+     * @param $categoryId
+     * @return mixed
+     */
 
     public function getByCategoryId($categoryId) {
         return Category::find($categoryId)->questions;
