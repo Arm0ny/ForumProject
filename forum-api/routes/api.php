@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Http\Request;
@@ -25,9 +26,14 @@ Route::resource('questions', QuestionController::class);
 Route::prefix('questions')->group(function () {
     Route::get('/user/{userId}', [QuestionController::class, 'getByUserId']);
     Route::get('/category/{categoryId}', [QuestionController::class, 'getByCategoryId']);
-    Route::get('/user/{userId}/category/{categoryId}', [QuestionController::class, 'getByUserIdAndCategoryId']);
 });
 
 Route::resource('categories', CategoryController::class);
+
+Route::resource('answers', AnswerController::class);
+Route::prefix('answers')->group(function () {
+    Route::get('/user/{userId}', [AnswerController::class, 'getByUserId']);
+    Route::get('/question/{questionId}', [AnswerController::class, 'getByQuestionId']);
+});
 
 
