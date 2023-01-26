@@ -16,6 +16,7 @@ class Question extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['title', 'content', 'points', 'user_id', 'category_id'];
 
+    //comment
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
