@@ -8,12 +8,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule, HttpXsrfTokenExtractor} from '@angular/common/http';
 import { SetCsrfInterceptor } from './interceptors/setCsrf.interceptor';
 import {CookieService} from "ngx-cookie-service";
-import { RegisterComponent } from './components/auth/register/register.component';
-import { HomeComponent } from './components/home/home.component';
-import {SetHeadersInterceptor} from "./interceptors/set-headers.interceptor";
+import { RegisterComponent } from './components/auth/register/register.component';import {SetHeadersInterceptor} from "./interceptors/set-headers.interceptor";
+import { HomeComponent } from './components/core/home/home.component';
+import { QuestionComponent } from './components/shares/question/question.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,

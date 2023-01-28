@@ -1,0 +1,7 @@
+<main>
+  <article *ngIf="questions && questions.length">
+    <ng-container *ngFor="let question of questions">
+      <app-question [question]="question"></app-question>
+    </ng-container>
+  </article>
+</main>
