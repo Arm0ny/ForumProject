@@ -11,9 +11,10 @@ import {CookieService} from "ngx-cookie-service";
 import { RegisterComponent } from './components/auth/register/register.component';import {SetHeadersInterceptor} from "./interceptors/set-headers.interceptor";
 import { HomeComponent } from './components/core/home/home.component';
 import { QuestionComponent } from './components/shares/question/question.component';
+import { CategorySelectorComponent } from './components/shares/category-selector/category-selector.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, ],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, CategorySelectorComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,

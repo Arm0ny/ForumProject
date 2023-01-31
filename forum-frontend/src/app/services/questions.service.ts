@@ -15,7 +15,10 @@ export class QuestionsService {
     return this.http.get<QuestionsInterface[]>(this.baseUrl)
   }
 
-  getByCategory(category_id : number): Observable<QuestionsInterface[]>{
+  getByCategory(category_id : number|null = null): Observable<QuestionsInterface[]>{
+    if(!category_id){
+      return this.index()
+    }
     return this.http.get<QuestionsInterface[]>(this.baseUrl + `/category/${category_id}`)
   }
 }
