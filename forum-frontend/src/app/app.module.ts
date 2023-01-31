@@ -12,9 +12,10 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { HomeComponent } from './components/core/home/home.component';
 import { QuestionComponent } from './components/shares/question/question.component';
 import { CategorySelectorComponent } from './components/shares/category-selector/category-selector.component';
+import { NavbarComponent } from './components/shares/navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, CategorySelectorComponent, ],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, CategorySelectorComponent, NavbarComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,

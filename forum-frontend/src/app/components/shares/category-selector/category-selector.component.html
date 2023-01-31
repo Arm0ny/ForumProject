@@ -1,4 +1,4 @@
-<ul *ngIf="categories">
+<ul *ngIf="categories" class="flex gap-8">
   <li *ngFor="let category of categories">
     <button (click)="setCategory(category)">{{category.name}}</button>
   </li>

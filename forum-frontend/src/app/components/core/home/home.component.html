@@ -1,8 +1,9 @@
-<main *ngIf="questions">
-  <app-category-selector (setCategoryEvent)="onSetCategory($event)">
+<main *ngIf="questions" class="px-6 flex flex-col justify-center gap-6 align-items-center">
+  <app-category-selector (setCategoryEvent)="onSetCategory($event)" class="w-2/3 flex
+   justify-center align-items-center bg-secondary p-2 mt-6 rounded">
   </app-category-selector>
-  <article *ngFor="let question of questions">
-      <app-question  [question]="question"></app-question>
+  <article *ngFor="let question of questions" class="bg-secondary flex p-4 rounded">
+      <app-question  [question]="question" class="flex flex-col gap-2"></app-question>
   </article>
 </main>
 

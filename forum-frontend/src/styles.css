@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=Raleway:wght@300;400;500;600&display=swap");
 html {
-  background-color: #BABEC8; }
+  background-color: rgba(97, 125, 188, 0.32);
+  font-size: 16px; }
 
 @tailwind base;
 @tailwind components;
