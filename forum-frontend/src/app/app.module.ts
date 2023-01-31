@@ -7,7 +7,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule, HttpXsrfTokenExtractor} from '@angular/common/http';
 import { SetCsrfInterceptor } from './interceptors/setCsrf.interceptor';
-import {CookieService} from "ngx-cookie-service";
+import { CookieService } from "ngx-cookie-service";
 import { RegisterComponent } from './components/auth/register/register.component';import {SetHeadersInterceptor} from "./interceptors/set-headers.interceptor";
 import { HomeComponent } from './components/core/home/home.component';
 import { QuestionComponent } from './components/shares/question/question.component';

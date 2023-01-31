@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CategoriesService} from "../../../services/categories.service";
 import {CategoriesInterface} from "../../../interfaces/categories-interface";
 
@@ -12,13 +12,21 @@ export class CategorySelectorComponent implements OnInit {
 
   categories? : CategoriesInterface[]
 
+  //Event for sending category to parent component
+  @Output() setCategoryEvent = new EventEmitter<CategoriesInterface>();
 
   ngOnInit() {
     this.getCategories()
   }
 
+  //get the list of available Categories
   getCategories(){
     this.categoriesService.index()
       .subscribe((res) => this.categories = res)
+  }
+
+  //function to emit the @Output event
+  setCategory(category: CategoriesInterface){
+    this.setCategoryEvent.emit(category)
   }
 }
