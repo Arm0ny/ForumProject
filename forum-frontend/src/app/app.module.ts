@@ -13,9 +13,11 @@ import { HomeComponent } from './components/core/home/home.component';
 import { QuestionComponent } from './components/shares/question/question.component';
 import { CategorySelectorComponent } from './components/shares/category-selector/category-selector.component';
 import { NavbarComponent } from './components/shares/navbar/navbar.component';
-
+import { EditorDetailsComponent } from './components/core/editor-details/editor-details.component';
+import {EditorWriterComponent} from "./components/shares/editor-writer/editor-writer.component";
+import { EditorReaderComponent } from './components/shares/editor-reader/editor-reader.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, CategorySelectorComponent, NavbarComponent, ],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, CategorySelectorComponent, NavbarComponent, EditorDetailsComponent, EditorWriterComponent, EditorReaderComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,
