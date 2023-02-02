@@ -1,3 +1,8 @@
-<textarea (input)="onInput($event)">
-
-</textarea>
+<form *ngIf="writerForm" [formGroup]="writerForm" (ngSubmit)="onSubmit()">
+  <select formControlName="category" *ngIf="categories">
+    <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+  </select>
+  <input type="text" formControlName="title"/>
+  <textarea formControlName="content" (input)="onInput($event)"></textarea>
+  <button type="submit" [disabled]="!writerForm.valid">Submit</button>
+</form>

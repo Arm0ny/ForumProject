@@ -17,7 +17,8 @@ export class SetHeadersInterceptor implements HttpInterceptor {
       setHeaders: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }
+      },
+      withCredentials: true
     });
     return next.handle(request);
   }

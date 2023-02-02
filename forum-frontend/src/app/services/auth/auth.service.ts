@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable, switchMap } from 'rxjs';
+import {UserInterface} from "../../interfaces/user-interface";
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +42,7 @@ export class AuthService {
       );
   }
 
-  getUser(){
-    return this.http.get(this.baseUrl + '/api/user');
+  getUser() : Observable<UserInterface>{
+    return this.http.get<UserInterface>(this.baseUrl + '/api/user');
   }
 }

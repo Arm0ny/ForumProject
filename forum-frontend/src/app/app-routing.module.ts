@@ -8,8 +8,7 @@ import {EditorDetailsComponent} from "./components/core/editor-details/editor-de
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'questions', component: QuestionComponent},
+  {path: 'questions', component: HomeComponent},
   {path: 'editor', component: EditorDetailsComponent},
 ];
 

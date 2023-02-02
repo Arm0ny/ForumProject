@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,EAAE;EACA,WAAW,EAAE,qBAAqB;EAClC,WAAW,EAAE,IAAI;EACjB,SAAS,EAAE,OAAO;;AAEpB,CAAC;EACC,WAAW,EAAE,mBAAmB;EAChC,WAAW,EAAE,GAAG",
+"mappings": "AAAA,EAAE;EACA,WAAW,EAAE,qBAAqB;EAClC,WAAW,EAAE,IAAI;EACjB,SAAS,EAAE,OAAO;;AAEpB,GAAG;EACD,WAAW,EAAE,mBAAmB;EAChC,WAAW,EAAE,GAAG",
 "sources": ["question.component.sass"],
 "names": [],
 "file": "question.component.css"

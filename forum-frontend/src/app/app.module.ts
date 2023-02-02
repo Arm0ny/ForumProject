@@ -16,8 +16,9 @@ import { NavbarComponent } from './components/shares/navbar/navbar.component';
 import { EditorDetailsComponent } from './components/core/editor-details/editor-details.component';
 import {EditorWriterComponent} from "./components/shares/editor-writer/editor-writer.component";
 import { EditorReaderComponent } from './components/shares/editor-reader/editor-reader.component';
+import { MarkdownPipePipe } from './pipes/markdown-pipe.pipe';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, CategorySelectorComponent, NavbarComponent, EditorDetailsComponent, EditorWriterComponent, EditorReaderComponent, ],
+  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, CategorySelectorComponent, NavbarComponent, EditorDetailsComponent, EditorWriterComponent, EditorReaderComponent, MarkdownPipePipe, ],
   imports: [
     BrowserModule,
     AppRoutingModule,
