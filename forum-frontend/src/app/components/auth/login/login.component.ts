@@ -20,7 +20,7 @@ export class LoginComponent {
     let email = this.loginForm.get('email')?.getRawValue();
     let password = this.loginForm.get('password')?.getRawValue();
     this.authService.login(email, password).subscribe(
-      (res) => this.router.navigate(['home']),
+      (res) => this.router.navigate(['questions']),
       (err) => {
         console.error(err);
       }
