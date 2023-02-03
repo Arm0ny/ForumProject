@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {QuestionsService} from "../../../services/questions.service";
 import {QuestionsInterface} from "../../../interfaces/questionsInterface";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -9,6 +10,11 @@ import {QuestionsInterface} from "../../../interfaces/questionsInterface";
   styleUrls: ['./question.component.sass']
 })
 export class QuestionComponent {
-  @Input() question? : QuestionsInterface;
+  constructor(private router : Router) {
+  }
+  @Input() question? : QuestionsInterface
 
+  onClick() {
+    this.router.navigate(['questions', this.question?.id])
+  }
 }

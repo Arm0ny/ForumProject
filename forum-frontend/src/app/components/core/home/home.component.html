@@ -2,9 +2,7 @@
   <app-category-selector (setCategoryEvent)="onSetCategory($event)" class="w-2/3 flex
    justify-center align-items-center bg-secondary p-2 mt-6 rounded">
   </app-category-selector>
-  <article *ngFor="let question of questions" class="bg-secondary flex p-4 rounded">
-      <app-question  [question]="question" class="flex flex-col gap-2"></app-question>
-  </article>
+  <app-question *ngFor="let question of questions" [question]="question" class="bg-secondary flex p-4 rounded"></app-question>
 </main>
 
 

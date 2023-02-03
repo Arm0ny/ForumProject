@@ -1,1 +1,6 @@
-<p>question-details works!</p>
+<article *ngIf="question" class ="flex flex-col p-8 gap-10">
+  <h1 class="bg-secondary text-2xl p-8">{{question.title}}</h1>
+  <app-editor-reader [markedString]="question.content" class="bg-secondary p-8">
+
+  </app-editor-reader>
+</article>
