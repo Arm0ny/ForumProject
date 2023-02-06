@@ -30,8 +30,8 @@ Route::prefix('questions')->group(function () {
 
 Route::resource('categories', CategoryController::class);
 
-Route::resource('answers', AnswerController::class);
-Route::prefix('answers')->group(function () {
+Route::resource('answer', AnswerController::class);
+Route::prefix('answer')->group(function () {
     Route::get('/user/{userId}', [AnswerController::class, 'getByUserId']);
     Route::get('/question/{questionId}', [AnswerController::class, 'getByQuestionId']);
 });

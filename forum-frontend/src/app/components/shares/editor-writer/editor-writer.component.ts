@@ -40,7 +40,10 @@ export class EditorWriterComponent implements OnInit{
 
 
     return this.questionsService.store(title, content, category_id)
-      .subscribe(res => console.log(res))
+      .subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      )
 
   }
 }

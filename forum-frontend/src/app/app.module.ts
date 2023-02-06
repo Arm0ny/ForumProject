@@ -18,8 +18,22 @@ import {EditorWriterComponent} from "./components/shares/editor-writer/editor-wr
 import { EditorReaderComponent } from './components/shares/editor-reader/editor-reader.component';
 import { MarkdownPipePipe } from './pipes/markdown-pipe.pipe';
 import { QuestionDetailsComponent } from './components/core/question-details/question-details.component';
+import { AnswerComponent } from './components/core/answer/answer.component';
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent, HomeComponent, QuestionComponent, CategorySelectorComponent, NavbarComponent, EditorDetailsComponent, EditorWriterComponent, EditorReaderComponent, MarkdownPipePipe, QuestionDetailsComponent, ],
+  declarations: [AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    QuestionComponent,
+    CategorySelectorComponent,
+    NavbarComponent,
+    EditorDetailsComponent,
+    EditorWriterComponent,
+    EditorReaderComponent,
+    MarkdownPipePipe,
+    QuestionDetailsComponent,
+    AnswerComponent,],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
