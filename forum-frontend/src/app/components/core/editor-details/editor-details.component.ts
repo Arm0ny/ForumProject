@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -6,10 +6,14 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   templateUrl: './editor-details.component.html',
   styleUrls: ['./editor-details.component.sass']
 })
-export class EditorDetailsComponent implements OnInit{
+export class EditorDetailsComponent implements OnInit, OnChanges{
   editorForm?: FormGroup
   writerContent? : string;
   markedString = ''
+
+  ngOnChanges() {
+    console.log('foo')
+  }
 
   ngOnInit() {
     this.editorForm = new FormGroup({

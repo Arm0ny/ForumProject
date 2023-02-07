@@ -15,10 +15,10 @@ import { CategorySelectorComponent } from './components/shares/category-selector
 import { NavbarComponent } from './components/shares/navbar/navbar.component';
 import { EditorDetailsComponent } from './components/core/editor-details/editor-details.component';
 import {EditorWriterComponent} from "./components/shares/editor-writer/editor-writer.component";
-import { EditorReaderComponent } from './components/shares/editor-reader/editor-reader.component';
 import { MarkdownPipePipe } from './pipes/markdown-pipe.pipe';
 import { QuestionDetailsComponent } from './components/core/question-details/question-details.component';
-import { AnswerComponent } from './components/core/answer/answer.component';
+import { AnswerWriterComponent } from './components/core/answer-writer/answer-writer.component';
+import { AnswerReaderComponent } from './components/shares/answer-reader/answer-reader.component';
 @NgModule({
   declarations: [AppComponent,
     LoginComponent,
@@ -29,10 +29,10 @@ import { AnswerComponent } from './components/core/answer/answer.component';
     NavbarComponent,
     EditorDetailsComponent,
     EditorWriterComponent,
-    EditorReaderComponent,
     MarkdownPipePipe,
     QuestionDetailsComponent,
-    AnswerComponent,],
+    AnswerWriterComponent,
+    AnswerReaderComponent,],
 
   imports: [
     BrowserModule,

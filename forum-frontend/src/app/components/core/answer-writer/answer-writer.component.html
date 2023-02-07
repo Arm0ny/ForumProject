@@ -1,5 +1,5 @@
 <form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
   <textarea (input)="onInput($event)" formControlName="content"></textarea>
-  <app-editor-reader [markedString]="markedString"></app-editor-reader>
+  <div [innerHTML]="markedString | markdownPipe"></div>
   <button [disabled]="!answerForm.valid" type="submit">Submit</button>
 </form>

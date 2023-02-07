@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditorReaderComponent } from './editor-reader.component';
+import { AnswerWriterComponent } from './answer-writer.component';
 
-describe('EditorReaderComponent', () => {
-  let component: EditorReaderComponent;
-  let fixture: ComponentFixture<EditorReaderComponent>;
+describe('AnswersComponent', () => {
+  let component: AnswerWriterComponent;
+  let fixture: ComponentFixture<AnswerWriterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditorReaderComponent ]
+      declarations: [ AnswerWriterComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EditorReaderComponent);
+    fixture = TestBed.createComponent(AnswerWriterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

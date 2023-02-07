@@ -4,11 +4,11 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-answer',
-  templateUrl: './answer.component.html',
-  styleUrls: ['./answer.component.sass']
+  selector: 'app-answer-writer',
+  templateUrl: './answer-writer.component.html',
+  styleUrls: ['./answer-writer.component.sass']
 })
-export class AnswerComponent {
+export class AnswerWriterComponent {
   constructor(private answerService : AnswersService, private route : ActivatedRoute) { }
   answerForm = new FormGroup({
     content : new FormControl(null, Validators.required),

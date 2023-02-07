@@ -40,4 +40,8 @@ export class AuthService {
   getUser() : Observable<UserInterface>{
     return this.http.get<UserInterface>(this.baseUrl + '/api/user');
   }
+
+  getUserById(user_id : string) : Observable<UserInterface>{
+    return this.http.get<UserInterface>(this.baseUrl + '/api/user/' + user_id );
+  }
 }
