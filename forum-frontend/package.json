@@ -21,6 +21,8 @@
     "@stackoverflow/stacks-editor": "^0.8.4",
     "@types/dompurify": "^2.4.0",
     "@types/marked": "^4.0.8",
+    "angularfire2": "^5.4.2",
+    "firebase": "^7.24.0",
     "marked": "^4.2.12",
     "ngx-cookie-service": "^15.0.0",
     "rxjs": "~7.5.0",
