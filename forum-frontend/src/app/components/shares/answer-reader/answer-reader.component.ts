@@ -14,7 +14,7 @@ export class AnswerReaderComponent implements OnInit {
   answerUser! : UserInterface
 
   ngOnInit() {
-    this.authService.getUser()
+    this.authService.getUserById(this.answer.user_id)
       .subscribe(res => this.answerUser = res)
   }
 }

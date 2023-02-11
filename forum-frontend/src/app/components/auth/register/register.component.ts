@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AuthService} from "../../../services/auth/auth.service";
 import {CookieService} from "ngx-cookie-service";
 import {FormControl, FormGroup} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router : Router) {}
   registerForm = new FormGroup({
     name: new FormControl(),
     email: new FormControl(''),
@@ -23,7 +24,9 @@ export class RegisterComponent {
     let password = this.registerForm.get('password')?.getRawValue();
     let password_confirmation = this.registerForm.get('password_confirmation')?.getRawValue()
     this.authService.register(name, email, password, password_confirmation).subscribe(
-      (res) => console.log(res),
+      (res) => {
+        this.router.navigate(['questions'])
+      },
       (err) => {
         console.error(err);
       }

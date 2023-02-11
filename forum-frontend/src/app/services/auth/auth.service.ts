@@ -31,7 +31,7 @@ export class AuthService {
         switchMap(() =>
           this.http.post(
             this.baseUrl + '/register',
-            { name, email, password, password_confirmation},
+            { name, email, password, password_confirmation },
           )
         )
       );
@@ -41,7 +41,7 @@ export class AuthService {
     return this.http.get<UserInterface>(this.baseUrl + '/api/user');
   }
 
-  getUserById(user_id : string) : Observable<UserInterface>{
+  getUserById(user_id : number) : Observable<UserInterface>{
     return this.http.get<UserInterface>(this.baseUrl + '/api/user/' + user_id );
   }
 }
