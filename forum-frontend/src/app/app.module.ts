@@ -19,6 +19,10 @@ import { MarkdownPipePipe } from './pipes/markdown-pipe.pipe';
 import { QuestionDetailsComponent } from './components/core/question-details/question-details.component';
 import { AnswerWriterComponent } from './components/core/answer-writer/answer-writer.component';
 import { AnswerReaderComponent } from './components/shares/answer-reader/answer-reader.component';
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {environment} from "../environments/environment";
+import { CreateProfileComponent } from './components/core/create-profile/create-profile.component';
 @NgModule({
   declarations: [AppComponent,
     LoginComponent,
@@ -32,7 +36,8 @@ import { AnswerReaderComponent } from './components/shares/answer-reader/answer-
     MarkdownPipePipe,
     QuestionDetailsComponent,
     AnswerWriterComponent,
-    AnswerReaderComponent,],
+    AnswerReaderComponent,
+    CreateProfileComponent,],
 
   imports: [
     BrowserModule,
@@ -40,6 +45,8 @@ import { AnswerReaderComponent } from './components/shares/answer-reader/answer-
     HttpClientModule,
     HttpClientXsrfModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SetHeadersInterceptor, multi: true },
