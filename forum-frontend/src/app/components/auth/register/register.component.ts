@@ -25,7 +25,7 @@ export class RegisterComponent {
     let password_confirmation = this.registerForm.get('password_confirmation')?.getRawValue()
     this.authService.register(name, email, password, password_confirmation).subscribe(
       (res) => {
-        this.router.navigate(['questions'])
+        this.router.navigate(['create-profile'])
       },
       (err) => {
         console.error(err);

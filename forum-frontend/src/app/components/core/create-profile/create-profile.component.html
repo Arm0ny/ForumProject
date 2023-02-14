@@ -1,3 +1,6 @@
-<label for="profile-image"></label>
-<input (change)="upload($event)" type="file" id="profile-image" formControlName="image" accept=".jpg, .png"/>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <label for="profile-image"></label>
+  <input formControlName="profileImage" (change)="upload($event)" type="file" id="profile-image" accept=".jpg, .png"/>
+  <button type="submit">Save!</button>
+</form>
 

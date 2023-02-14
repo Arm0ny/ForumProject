@@ -23,7 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->resource('user', UserController::class);
+Route::middleware('auth:sanctum')->get('/user/{id}', [UserController::class, 'show']);
+Route::middleware('auth:sanctum')->put('/user/{id}', [UserController::class, 'update']);
+
 
 Route::middleware('auth:sanctum')->resource('questions', QuestionController::class);
 Route::prefix('questions')->group(function () {
