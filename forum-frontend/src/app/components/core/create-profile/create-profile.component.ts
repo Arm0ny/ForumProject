@@ -50,7 +50,7 @@ export class CreateProfileComponent implements OnInit {
       this.authService
         .updateUser(
           this.user.id,
-          {profile_image : Md5.hashStr(this.user.name)})
+          {profile_image : Md5.hashStr(this.user.name) + '.' + this.imageType})
         .subscribe(
           res => {
             this.router.navigate(['questions'])

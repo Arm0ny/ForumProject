@@ -1,5 +1,5 @@
 <article (click)="onClick()" *ngIf="question" class="flex flex-col gap-2">
-<span><img [src]="'profile_images/' + creatorUser.profile_image | getDownloadURL"/><h1 class="font-bold">{{question.title}}</h1></span>
+<span><img [src]="'/profile-images/' + creatorUser.profile_image | getDownloadURL" class="w-4 h-4 rounded-full"/><h1 class="font-bold">{{question.title}}</h1></span>
 <h2>{{question.category_id}}</h2>
 <div [innerHTML]="question.content | markdownPipe"></div>
 </article>
