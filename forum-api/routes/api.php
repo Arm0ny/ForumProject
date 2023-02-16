@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->put('/user/{id}', [UserController::class, 'up
 
 
 Route::middleware('auth:sanctum')->resource('questions', QuestionController::class);
+
 Route::prefix('questions')->group(function () {
     Route::get('/user/{userId}', [QuestionController::class, 'getByUserId']);
     Route::get('/category/{categoryId}', [QuestionController::class, 'getByCategoryId']);

@@ -1,5 +1,11 @@
-<article (click)="onClick()" *ngIf="question" class="flex flex-col gap-2">
-<span><img [src]="'/profile-images/' + creatorUser.profile_image | getDownloadURL" class="w-4 h-4 rounded-full"/><h1 class="font-bold">{{question.title}}</h1></span>
-<h2>{{question.category_id}}</h2>
-<div [innerHTML]="question.content | markdownPipe"></div>
+<article (click)="onClick()" *ngIf="question" class="flex flex-col gap-4 h-1/4">
+  <header *ngIf="creatorUser" class="flex gap-4 items-center">
+    <img [src]="'/profile-images/' + creatorUser.profile_image | getDownloadURL" class="w-6 h-6 rounded-full" alt="{{creatorUser.name}}"/>
+    <h2 class="font-light">Posted By: {{creatorUser.name}}</h2>
+  </header>
+
+  <div class="ml-2 flex flex-col gap-2">
+  <h1 class="font-bold">{{question.title}}</h1>
+  <div [innerHTML]="question.content | removeMarkdown | getSlug" class="question-content font-weight-lighter"></div>
+  </div>
 </article>

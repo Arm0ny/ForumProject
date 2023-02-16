@@ -23,6 +23,8 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {environment} from "../environments/environment";
 import { CreateProfileComponent } from './components/core/create-profile/create-profile.component';
+import { GetSlugPipe } from './pipes/get-slug.pipe';
+import { RemoveMarkdownPipe } from './pipes/remove-markdown.pipe';
 @NgModule({
   declarations: [AppComponent,
     LoginComponent,
@@ -37,7 +39,9 @@ import { CreateProfileComponent } from './components/core/create-profile/create-
     QuestionDetailsComponent,
     AnswerWriterComponent,
     AnswerReaderComponent,
-    CreateProfileComponent,],
+    CreateProfileComponent,
+    GetSlugPipe,
+    RemoveMarkdownPipe,],
 
   imports: [
     BrowserModule,

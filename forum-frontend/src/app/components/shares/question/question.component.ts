@@ -14,6 +14,8 @@ import {AuthService} from "../../../services/auth/auth.service";
 export class QuestionComponent implements OnInit{
   constructor(private router : Router, private authService : AuthService) { }
 
+  creatorUser? : UserInterface
+
   ngOnInit() {
         this.authService.getUserById(this.question.user_id)
           .subscribe(
@@ -21,7 +23,6 @@ export class QuestionComponent implements OnInit{
           err => console.log(err)
           )
     }
-  creatorUser! : UserInterface
 
   @Input() question! : QuestionsInterface
 
