@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'questions', component: HomeComponent},
   {path: 'questions/:id', component: QuestionDetailsComponent},
-  {path: 'editor', component: EditorDetailsComponent, canActivate : [AuthGuardGuard]},
+  {path: 'editor', component: EditorDetailsComponent},
   {path: 'create-profile', component: CreateProfileComponent},
 ];
 
