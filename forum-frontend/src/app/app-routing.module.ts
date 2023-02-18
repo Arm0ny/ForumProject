@@ -7,13 +7,13 @@ import {QuestionComponent} from "./components/shares/question/question.component
 import {EditorDetailsComponent} from "./components/core/editor-details/editor-details.component";
 import {QuestionDetailsComponent} from "./components/core/question-details/question-details.component";
 import {CreateProfileComponent} from "./components/core/create-profile/create-profile.component";
-import {AuthGuardGuard} from "./guards/auth-guard.guard";
+import {AuthGuard} from "./guards/auth.guard";
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  {path: 'login', component: LoginComponent },
   {path: 'register', component: RegisterComponent},
-  {path: 'questions', component: HomeComponent},
+  {path: '', component: HomeComponent},
   {path: 'questions/:id', component: QuestionDetailsComponent},
-  {path: 'editor', component: EditorDetailsComponent},
+  {path: 'editor', component: EditorDetailsComponent, canActivate : [AuthGuard]},
   {path: 'create-profile', component: CreateProfileComponent},
 ];
 

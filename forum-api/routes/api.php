@@ -23,13 +23,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->get('/user/{id}', [UserController::class, 'show']);
-Route::middleware('auth:sanctum')->put('/user/{id}', [UserController::class, 'update']);
+Route::prefix('user')->group(function(){
+    Route::get('/{id}', [UserController::class, 'show']);
+    Route::middleware('auth:sanctum')->put('/{id}', [UserController::class, 'update']);
+});
+;
 
-
-Route::middleware('auth:sanctum')->resource('questions', QuestionController::class);
 
 Route::prefix('questions')->group(function () {
+    Route::get('', [QuestionController::class, 'index']);
+    Route::get('/{id}', [QuestionController::class, 'show']);
+    Route::middleware('auth:sanctum')->post('', [QuestionController::class, 'store']);
     Route::get('/user/{userId}', [QuestionController::class, 'getByUserId']);
     Route::get('/category/{categoryId}', [QuestionController::class, 'getByCategoryId']);
 });
