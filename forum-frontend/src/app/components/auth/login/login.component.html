@@ -4,7 +4,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 justify-center items-center p-6">
         <input type="text" formControlName="email" required placeholder="Username" class="py-4 px-4 rounded-full bg-[#F4F6FF]">
         <input type="password" formControlName="password" required placeholder="Password" class="py-4 px-4 rounded-full bg-[#F4F6FF]">
-        <span class="flex gap-4 justify-between w-full"><button type="submit" class=" p-4  bg-[#3D5AF1] rounded text-secondary">Login</button> <button class="p-4 border-solid border-2 border-[#3D5AF1] rounded" routerLink="/register">Register</button></span>
+        <span class="flex gap-4 justify-between w-full"><button type="submit" class=" p-4  bg-accent rounded text-secondary">Login</button> <button class="p-4 border-solid border-2 border-accent rounded" routerLink="/register">Register</button></span>
     </form>
   </div>
 </main>

@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,GAAG;EACD,UAAU,EAAE,iCAA4B",
+"sources": ["navbar.component.sass"],
 "names": [],
 "file": "navbar.component.css"
 }

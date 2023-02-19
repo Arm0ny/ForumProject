@@ -1,6 +1,6 @@
 <article (click)="onClick()" *ngIf="question" class="flex flex-col gap-4 h-1/4">
   <header *ngIf="creatorUser" class="flex gap-4 items-center">
-    <img [src]="'/profile-images/' + creatorUser.profile_image | getDownloadURL" class="w-6 h-6 rounded-full" alt="{{creatorUser.name}}"/>
+    <img [src]="'/profile-images/' + creatorUser.profile_image | getDownloadURL" class="w-8 h-8 rounded-full" alt="{{creatorUser.name}}"/>
     <h2 class="font-light">Posted By: {{creatorUser.name}}</h2>
   </header>
 

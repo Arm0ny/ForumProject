@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,EAAE;EACA,UAAU,EAAE,kCAA6B",
+"sources": ["category-selector.component.sass"],
 "names": [],
 "file": "category-selector.component.css"
 }
