@@ -2,10 +2,10 @@
   <div class="container flex flex-col bg-secondary gap-6 p-6 rounded">
     <header class="text-center">Register</header>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 justify-center items-center p-6">
-        <input type="text" formControlName="name" required placeholder="Username" class="py-4 px-4 rounded-full bg-[#F4F6FF]">
-        <input type="text" formControlName="email" required placeholder="email" class="py-4 px-4 rounded-full bg-[#F4F6FF]">
-        <input type="password" formControlName="password" required placeholder="password" class="py-4 px-4 rounded-full bg-[#F4F6FF]">
-        <input type="password" formControlName="password_confirmation" required placeholder="confirm password" class="py-4 px-4 rounded-full bg-[#F4F6FF]">
+        <input type="text" formControlName="name" required placeholder="Username" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
+        <input type="text" formControlName="email" required placeholder="email" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
+        <input type="password" formControlName="password" required placeholder="password" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
+        <input type="password" formControlName="password_confirmation" required placeholder="confirm password" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
       <button type="submit" class=" p-4  bg-[#3D5AF1] rounded text-secondary">Done !</button>
     </form>
   </div>
