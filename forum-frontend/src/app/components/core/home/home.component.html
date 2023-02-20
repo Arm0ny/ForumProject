@@ -3,7 +3,7 @@
    justify-center align-items-center mt-6">
   </app-category-selector>
   <app-question *ngFor="let question of questions" [question]="question" class="bg-secondary flex p-4 rounded h-1/5"></app-question>
-
+  <a (click)="loadMore()">Load More!</a>
   <a routerLink="/editor" class="fixed bottom-10 right-6 p-2 w-20 h-20 rounded-full bg-[#4361EE] "><img [src]="'/icons/plus-button.svg' | getDownloadURL" alt="Ask Question"/></a>
 </main>
 

@@ -16,7 +16,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return response(Question::all());
+        return Question::orderBy('created_at', 'desc')->cursorPaginate(1);
     }
 
 
