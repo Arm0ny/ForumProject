@@ -1,11 +1,18 @@
-<article *ngIf="question" class="flex flex-col p-8 gap-10">
-  <h1 class="bg-secondary text-2xl p-8">{{question.title}}</h1>
+<main class="flex flex-col p-8 gap-10">
+  <section class="flex flex-col gap-10">
+    <article *ngIf="question" class="flex flex-col bg-secondary rounded p-6 gap-6">
+      <h1 class="text-2xl">{{question.title}}</h1>
+      <div [innerHTML]="question.content | markdownPipe" class="bg-secondary"></div>
+    </article>
 
-  <div [innerHTML]="question.content | markdownPipe" class="bg-secondary p-8"></div>
+    <article class="bg-secondary rounded p-6">
+      <app-answer-writer></app-answer-writer>
+    </article>
+  </section>
 
-  <app-answer-writer></app-answer-writer>
-</article>
-
-<ng-container *ngIf="answers && answers.length">
-  <app-answer-reader *ngFor="let answer of answers" [answer]="answer"></app-answer-reader>
-</ng-container>
+  <section>
+    <ng-container *ngIf="answers && answers.length">
+      <app-answer-reader *ngFor="let answer of answers" [answer]="answer"></app-answer-reader>
+    </ng-container>
+  </section>
+</main>

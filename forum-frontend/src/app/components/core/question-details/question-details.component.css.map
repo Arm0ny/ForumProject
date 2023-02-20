@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,OAAO;EACL,UAAU,EAAE,kCAA6B;;AAE3C,EAAE;EACA,WAAW,EAAE,mBAAmB;EAChC,WAAW,EAAE,GAAG;;AAElB,GAAG;EACD,WAAW,EAAE,mBAAmB",
+"sources": ["question-details.component.sass"],
 "names": [],
 "file": "question-details.component.css"
 }
