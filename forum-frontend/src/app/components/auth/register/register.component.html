@@ -3,6 +3,15 @@
     <header class="text-center">Register</header>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 justify-center items-center p-6">
         <input type="text" formControlName="name" required placeholder="Username" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
+        <div *ngIf="username && username.invalid && (username.dirty || username.touched)" class="flex flex-col w-full bg-danger rounded p-2">
+          <p>A valid Username should:</p>
+          <ul class="flex flex-col w-full bg-danger indent-4">
+            <li>be 8-30 characters long</li>
+            <li>start with an alphabet</li>
+            <li>All other characters can be alphabets, numbers or an underscore</li>
+          </ul>
+        </div>
+
         <input type="text" formControlName="email" required placeholder="email" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
         <input type="password" formControlName="password" required placeholder="password" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
         <input type="password" formControlName="password_confirmation" required placeholder="confirm password" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
