@@ -15,34 +15,26 @@ export class HomeComponent {
   constructor(private questionsService: QuestionsService) {}
 
   ngOnInit() {
-    this.getAllQuestions();
+    this.getQuestions();
   }
 
-  getAllQuestions(page = '') {
-    this.questionsService.index(page).subscribe((response) => {
-      this.apiResponse = response;
-
+  getQuestions(page = '', categoryId: number | null = null) {
+    this.questionsService.getQuestions(page).subscribe((res) => {
+      this.apiResponse = res;
       if (this.questions === undefined) {
-        this.questions = response.data;
+        this.questions = res.data;
         return;
       }
-      this.questions.push(...response.data);
-      console.log(this.questions);
-    });
-  }
-
-  //function to get the questions filtered by category
-  getQuestionsByCategory(categoryId: number) {
-    this.questionsService.getByCategory(categoryId).subscribe((response) => {
-      this.apiResponse = response;
-      this.questions?.push(...response.data);
+      this.questions.push(...res.data);
     });
   }
 
   //receive category from child component
   onSetCategory(category: CategoriesInterface) {
     //get new questions from the category
-    this.getQuestionsByCategory(category.id);
+    this.questionsService.setCategory(category.id);
+    this.questions = [];
+    this.getQuestions('');
   }
 
   loadMore() {
@@ -50,6 +42,6 @@ export class HomeComponent {
       console.log('No more questions');
       return;
     }
-    this.getAllQuestions(this.apiResponse.next_cursor);
+    this.getQuestions(this.apiResponse.next_cursor);
   }
 }

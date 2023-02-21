@@ -16,7 +16,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return Question::orderBy('created_at', 'desc')->cursorPaginate(1);
+        return Question::orderBy('created_at', 'desc')->cursorPaginate(10);
     }
 
 
@@ -86,6 +86,6 @@ class QuestionController extends Controller
      */
 
     public function getByCategoryId($categoryId) {
-        return Category::find($categoryId)->questions;
+        return Question::orderBy('created_at')->where('category_id', '=', $categoryId)->cursorPaginate(1);
     }
 }

@@ -9,24 +9,35 @@ import { ApiResponseInterface } from '../interfaces/api-response-interface';
 })
 export class QuestionsService {
   baseUrl = 'http://127.0.0.1:8000/api/questions';
+  private categoryId?: number;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  index(page: string = ''): Observable<ApiResponseInterface> {
+  getQuestions(
+    page: string = '',
+    category = this.categoryId
+  ): Observable<ApiResponseInterface> {
+    let url = this.baseUrl;
+    if (category) {
+      url = this.baseUrl + '/category/' + category;
+    }
     const params = new HttpParams().set('cursor', page);
-    return this.http.get<ApiResponseInterface>(this.baseUrl, { params });
+    return this.http.get<ApiResponseInterface>(url, { params });
   }
 
-  getByCategory(
-    category_id: number | null = null
+  /* getByCategory(
+    category_id: number | null = null,
+    page = ''
   ): Observable<ApiResponseInterface> {
     if (!category_id) {
-      return this.index();
+      return this.getQuestions();
     }
+    const params = new HttpParams().set('cursor', page);
     return this.http.get<ApiResponseInterface>(
-      this.baseUrl + `/category/${category_id}`
+      this.baseUrl + `/category/${category_id}`,
+      { params }
     );
-  }
+  } */
 
   store(
     title: string,
@@ -47,5 +58,9 @@ export class QuestionsService {
 
   getById(questionId: string): Observable<QuestionsInterface> {
     return this.http.get<QuestionsInterface>(this.baseUrl + `/${questionId}`);
+  }
+
+  setCategory(categoryId: number) {
+    this.categoryId = categoryId;
   }
 }
