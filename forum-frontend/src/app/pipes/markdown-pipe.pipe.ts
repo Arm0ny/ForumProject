@@ -6,6 +6,6 @@ import { marked } from 'marked';
 })
 export class MarkdownPipePipe implements PipeTransform {
   transform(value: string): string {
-    return marked(value, { breaks: true, gfm: true });
+    return marked(value);
   }
 }

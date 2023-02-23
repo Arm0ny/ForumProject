@@ -33,6 +33,7 @@ import { GetSlugPipe } from './pipes/get-slug.pipe';
 import { RemoveMarkdownPipe } from './pipes/remove-markdown.pipe';
 import { TitlesShortenerPipe } from './pipes/titles-shortener.pipe';
 import { SidebarComponent } from './components/shares/sidebar/sidebar.component';
+import { ErrorMessageComponent } from './components/shares/error-message/error-message.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +54,7 @@ import { SidebarComponent } from './components/shares/sidebar/sidebar.component'
     RemoveMarkdownPipe,
     TitlesShortenerPipe,
     SidebarComponent,
+    ErrorMessageComponent,
   ],
 
   imports: [
