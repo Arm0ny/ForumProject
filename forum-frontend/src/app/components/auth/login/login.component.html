@@ -1,10 +1,36 @@
-<main class="px-6 w-full h-full flex flex-col items-center justify-center">
+<main class="px-6 w-full h-full flex flex-col items-center justify-center lg:w-1/2 m-auto">
   <div class="container flex flex-col bg-secondary gap-6 p-6 rounded">
-  <header class="text-center">Login</header>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 justify-center items-center p-6">
-        <input type="text" formControlName="email" required placeholder="Username" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
-        <input type="password" formControlName="password" required placeholder="Password" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
-        <span class="flex gap-4 justify-between w-full"><button type="submit" class=" p-4  bg-accent rounded text-secondary">Login</button> <button class="p-4 border-solid border-2 border-accent rounded" routerLink="/register">Register</button></span>
+    <header class="text-center">Login</header>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-6 justify-center items-center p-6"
+    >
+      <input
+        type="text"
+        formControlName="email"
+        required
+        placeholder="Username"
+        class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner"
+      />
+      <input
+        type="password"
+        formControlName="password"
+        required
+        placeholder="Password"
+        class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner"
+      />
+      <span class="flex gap-4 justify-between items-center w-full md:w-1/2">
+        <a
+          class=""
+          routerLink="/register"
+        >
+          Register
+        </a>
+        <button type="submit" class="p-4 bg-accent rounded text-secondary">
+          Login
+        </button></span
+      >
     </form>
   </div>
 </main>

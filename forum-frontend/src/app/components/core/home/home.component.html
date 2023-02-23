@@ -3,7 +3,7 @@
   class="p-6 lg:p-20 flex max-md:flex-col gap-6 align-items-center h-full md:justify-between w-full"
 >
   <section class="hidden md:block md:w-2/5 lg:1/5">
-    <app-sidebar></app-sidebar>
+    <app-sidebar (setCategoryEvent)="onSetCategory($event)"></app-sidebar>
   </section>
 
   <section class="flex flex-col gap-6 align-items-center md:w-4/5 lg:w-2/5">
