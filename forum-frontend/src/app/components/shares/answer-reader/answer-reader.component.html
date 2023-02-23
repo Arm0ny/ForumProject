@@ -1,6 +1,10 @@
-<article>
-  <span>
-    <h1>{{answerUser.name}}</h1>
-    <div [innerHTML]="answer.content | markdownPipe"></div>
-  </span>
+<article class="flex flex-col gap-4 bg-secondary rounded p-6 min-h-1/4">
+  <header class="flex items-center gap-4">
+    <img
+      [src]="'/profile-images/' + answerUser.profile_image | getDownloadURL"
+      [alt]="answerUser.name"
+    />
+    <h1 class="font-primary font-light">{{ answerUser.name }}</h1>
+  </header>
+  <div [innerHTML]="answer.content | markdownPipe" class=" font-primary font-normal"></div>
 </article>

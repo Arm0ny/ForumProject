@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,OAAO;EACL,UAAU,EAAE,kCAA6B",
+"sources": ["answer-reader.component.sass"],
 "names": [],
 "file": "answer-reader.component.css"
 }

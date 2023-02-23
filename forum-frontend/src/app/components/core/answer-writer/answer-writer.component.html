@@ -1,4 +1,4 @@
-<form [formGroup]="answerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 items-start">
+<form [formGroup]="answerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 items-center, justify-center">
   <textarea (input)="onInput($event)" formControlName="content" class="p-4 rounded bg-[#F4F6FF] shadow-inner"></textarea>
   <div [innerHTML]="markedString | markdownPipe"></div>
   <button [disabled]="!answerForm.valid" type="submit" class="p-4  bg-accent rounded text-secondary">Submit</button>

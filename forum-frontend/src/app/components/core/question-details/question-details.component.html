@@ -10,7 +10,7 @@
     </article>
   </section>
 
-  <section>
+  <section class="flex flex-col gap-10">
     <ng-container *ngIf="answers && answers.length">
       <app-answer-reader *ngFor="let answer of answers" [answer]="answer"></app-answer-reader>
     </ng-container>

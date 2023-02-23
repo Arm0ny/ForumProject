@@ -7,6 +7,13 @@ module.exports = {
       secondary: "#FFFFFF",
       accent: "#3D5AF1",
       danger: "#fecdd3",
+      none: "rgba(0,0,0,0%)",
+      textColor: "#1d1d1d",
+    },
+
+    fontFamily: {
+      primary: ["Inter"],
+      secondary: ["Raleway"],
     },
 
     borderRadius: {
@@ -16,7 +23,8 @@ module.exports = {
       md: "0.375rem",
       lg: "0.5rem",
       full: "9999px",
-      large: "12px",
+      large: "1.25rem",
+      xl: "1.5rem",
     },
 
     extend: {},

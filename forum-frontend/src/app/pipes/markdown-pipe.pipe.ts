@@ -1,13 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {marked} from "marked";
+import { marked } from 'marked';
 
 @Pipe({
-  name: 'markdownPipe'
+  name: 'markdownPipe',
 })
 export class MarkdownPipePipe implements PipeTransform {
-
   transform(value: string): string {
-    return marked(value);
+    return marked(value, { breaks: true, gfm: true });
   }
-
 }

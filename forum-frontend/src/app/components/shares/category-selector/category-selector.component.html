@@ -1,5 +1,11 @@
-<ul *ngIf="categories" class="flex gap-8 w-2/3 bg-secondary p-2 rounded items-center justify-between">
-  <li *ngFor="let category of categories">
-    <button (click)="setCategory(category)">{{category.name}}</button>
-  </li>
-</ul>
+<div class="flex md:flex-col md:gap-4">
+  <header *ngIf="categories" class="hidden md:block"><h1 class="font-primary font-medium text-3xl text-[#1B2D70]">Categories ({{categories.length}})</h1></header>
+  <ul
+    *ngIf="categories"
+    class="flex gap-8 w-2/3 bg-secondary p-2 rounded justify-between md:flex-col md:gap-6 md:bg-none font-primary font-medium text-font md:list-disc"
+  >
+    <li *ngFor="let category of categories" class="md:px-8 md:py-6 rounded-xl  focus:bg-secondary ">
+      <button (click)="setCategory(category)">{{ category.name }}</button>
+    </li>
+  </ul>
+</div>
