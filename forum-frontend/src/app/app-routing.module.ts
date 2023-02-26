@@ -8,9 +8,14 @@ import { EditorDetailsComponent } from './components/core/editor-details/editor-
 import { QuestionDetailsComponent } from './components/core/question-details/question-details.component';
 import { CreateProfileComponent } from './components/core/create-profile/create-profile.component';
 import { AuthGuard } from './guards/auth.guard';
+import { LoggedGuard } from './guarda/logged.guard';
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedGuard] },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [LoggedGuard],
+  },
   { path: '', component: HomeComponent },
   { path: 'questions/:id', component: QuestionDetailsComponent },
   {

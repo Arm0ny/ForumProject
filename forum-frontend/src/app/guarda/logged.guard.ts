@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -12,7 +13,7 @@ import { AuthService } from '../services/auth/auth.service';
   providedIn: 'root',
 })
 export class LoggedGuard implements CanActivate {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
   activate = false;
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -22,14 +23,14 @@ export class LoggedGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.authService.getUser().subscribe(
-      (res) => {
+    this.authService.getUser().subscribe((res) => {
+      if (res) {
         this.activate = false;
-      },
-      (err) => {
+        this.router.navigate(['']);
+      } else {
         this.activate = true;
       }
-    );
+    });
     return this.activate;
   }
 }
