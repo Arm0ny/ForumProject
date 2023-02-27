@@ -10,7 +10,7 @@ import { CategoriesInterface } from '../interfaces/categories-interface';
 })
 export class QuestionsService {
   baseUrl = 'http://127.0.0.1:8000/api/questions';
-  private categoryId?: number;
+  private categoryId?: number | null = null;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
   getQuestions(
@@ -46,7 +46,7 @@ export class QuestionsService {
     return this.http.get<QuestionsInterface>(this.baseUrl + `/${questionId}`);
   }
 
-  setCategory(categoryId: number) {
+  setCategory(categoryId: number | null) {
     this.categoryId = categoryId;
   }
 }

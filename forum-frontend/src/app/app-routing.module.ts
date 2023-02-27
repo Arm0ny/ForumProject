@@ -10,11 +10,10 @@ import { CreateProfileComponent } from './components/core/create-profile/create-
 import { AuthGuard } from './guards/auth.guard';
 import { LoggedGuard } from './guarda/logged.guard';
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, canActivate: [LoggedGuard] },
+  { path: 'login', component: LoginComponent },
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [LoggedGuard],
   },
   { path: '', component: HomeComponent },
   { path: 'questions/:id', component: QuestionDetailsComponent },

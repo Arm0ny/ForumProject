@@ -30,9 +30,9 @@ export class HomeComponent {
   }
 
   //receive category from child component
-  onSetCategory(category: CategoriesInterface) {
+  onSetCategory(categoryId: number | null) {
     //get new questions from the category
-    this.questionsService.setCategory(category.id);
+    this.questionsService.setCategory(categoryId);
     this.questions = [];
     this.getQuestions('');
   }

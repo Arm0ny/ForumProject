@@ -7,13 +7,13 @@ import { CategoriesInterface } from '../../../interfaces/categories-interface';
   styleUrls: ['./sidebar.component.sass'],
 })
 export class SidebarComponent {
-  @Output() setCategoryEvent = new EventEmitter<CategoriesInterface>();
+  @Output() setCategoryEvent = new EventEmitter<number | null>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  setCategory(category: CategoriesInterface) {
-    this.setCategoryEvent.emit(category);
+  setCategory(categoryId: number | null) {
+    this.setCategoryEvent.emit(categoryId);
   }
 }

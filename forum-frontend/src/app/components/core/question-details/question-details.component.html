@@ -6,7 +6,8 @@
     </article>
 
     <article class="bg-secondary rounded p-6">
-      <app-answer-writer></app-answer-writer>
+      <app-answer-writer *ngIf="user else loginReminder"></app-answer-writer>
+      <ng-template #loginReminder><span><p>You need to be logged to post answers</p><a routerLink="/login">Log In!</a></span></ng-template>
     </article>
   </section>
 
