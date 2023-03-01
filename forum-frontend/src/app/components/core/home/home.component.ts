@@ -3,6 +3,7 @@ import { QuestionsInterface } from '../../../interfaces/questionsInterface';
 import { QuestionsService } from '../../../services/questions.service';
 import { CategoriesInterface } from '../../../interfaces/categories-interface';
 import { ApiResponseInterface } from '../../../interfaces/api-response-interface';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -10,31 +11,38 @@ import { ApiResponseInterface } from '../../../interfaces/api-response-interface
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent {
+  private destroyed = new Subject();
   apiResponse?: ApiResponseInterface;
   questions?: QuestionsInterface[];
   constructor(private questionsService: QuestionsService) {}
 
   ngOnInit() {
-    this.getQuestions();
+    this.questionsService
+      .apiResponseOf()
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((res) => {
+        this.apiResponse = res;
+        this.questions = res.data;
+      });
+    this.refreshQuestions();
   }
 
-  getQuestions(page = '', categoryId: number | null = null) {
-    this.questionsService.getQuestions(page).subscribe((res) => {
+  refreshQuestions(page = '', categoryId: number | null = null) {
+    /* this.questionsService.getQuestions(page).subscribe((res) => {
       this.apiResponse = res;
-      if (this.questions === undefined) {
+      if (this.questions?.length === 0 || !this.questions) {
         this.questions = res.data;
         return;
       }
-      this.questions.push(...res.data);
-    });
-  }
-
-  //receive category from child component
-  onSetCategory(categoryId: number | null) {
-    //get new questions from the category
-    this.questionsService.setCategory(categoryId);
-    this.questions = [];
-    this.getQuestions('');
+      //this.questions?.push(...res.data);
+    }); */
+    if (!this.questions || this.questions.length === 0) {
+      this.questionsService.getQuestions().subscribe((res) => this.apiResponse);
+    } else {
+      this.questionsService.getQuestions().subscribe((res) => {
+        this.apiResponse = res;
+      });
+    }
   }
 
   loadMore() {
@@ -42,6 +50,6 @@ export class HomeComponent {
       console.log('No more questions');
       return;
     }
-    this.getQuestions(this.apiResponse.next_cursor);
+    this.refreshQuestions(this.apiResponse.next_cursor);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CategoriesService } from '../../../services/categories.service';
 import { CategoriesInterface } from '../../../interfaces/categories-interface';
+import { QuestionsService } from '../../../services/questions.service';
 
 @Component({
   selector: 'app-category-selector',
@@ -8,7 +9,10 @@ import { CategoriesInterface } from '../../../interfaces/categories-interface';
   styleUrls: ['./category-selector.component.sass'],
 })
 export class CategorySelectorComponent implements OnInit {
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(
+    private categoriesService: CategoriesService,
+    private questionsService: QuestionsService
+  ) {}
 
   categories?: CategoriesInterface[];
 
@@ -17,6 +21,7 @@ export class CategorySelectorComponent implements OnInit {
 
   ngOnInit() {
     this.getCategories();
+    this.setCategorySubject(null);
   }
 
   //get the list of available Categories
@@ -27,5 +32,9 @@ export class CategorySelectorComponent implements OnInit {
   //function to emit the @Output event
   setCategory(categoryId: number | null) {
     this.setCategoryEvent.emit(categoryId);
+  }
+
+  setCategorySubject(categoryId: number | null) {
+    this.questionsService.setCategory(categoryId);
   }
 }
