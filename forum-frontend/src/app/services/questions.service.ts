@@ -17,25 +17,27 @@ import { CategoriesInterface } from '../interfaces/categories-interface';
 export class QuestionsService {
   baseUrl = 'http://127.0.0.1:8000/api/questions';
   private categorySubject = new BehaviorSubject<number | null>(null);
-  apiBehavior = new ReplaySubject<ApiResponseInterface>(1);
+  cursor: string = '';
+  apiBehavior$ = new BehaviorSubject<ApiResponseInterface>({
+    data: [],
+    next_cursor: '',
+    prev_page_url: '',
+  });
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  apiResponseOf() {
-    return this.apiBehavior.asObservable();
+  apiResponseOf(): Observable<ApiResponseInterface> {
+    return this.apiBehavior$;
   }
   getQuestions(
-    page: string = '',
+    page = this.cursor,
     category = this.categorySubject.getValue()
-  ): Observable<ApiResponseInterface> {
-    let url = this.baseUrl;
-    if (category) {
-      url = this.baseUrl + '/category/' + category;
-    }
+  ): void {
+    let url = category ? `${this.baseUrl}/category/${category}` : this.baseUrl;
     const params = new HttpParams().set('cursor', page);
-    return this.http
-      .get<ApiResponseInterface>(url, { params })
-      .pipe(tap((res) => this.apiBehavior.next(res)));
+    this.http.get<ApiResponseInterface>(url, { params }).subscribe((res) => {
+      this.apiBehavior$.next(res);
+    });
   }
 
   store(
@@ -61,6 +63,10 @@ export class QuestionsService {
 
   setCategory(categoryId: number | null) {
     this.categorySubject.next(categoryId);
-    this.getQuestions().subscribe((res) => this.apiBehavior.next(res));
+    this.getQuestions();
+  }
+
+  setCursor(page: string) {
+    this.cursor = page;
   }
 }

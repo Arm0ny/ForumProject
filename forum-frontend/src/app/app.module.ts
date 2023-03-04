@@ -34,6 +34,7 @@ import { RemoveMarkdownPipe } from './pipes/remove-markdown.pipe';
 import { TitlesShortenerPipe } from './pipes/titles-shortener.pipe';
 import { SidebarComponent } from './components/shares/sidebar/sidebar.component';
 import { ErrorMessageComponent } from './components/shares/error-message/error-message.component';
+import { UsersRankingComponent } from './components/shared/users-ranking/users-ranking.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { ErrorMessageComponent } from './components/shares/error-message/error-m
     TitlesShortenerPipe,
     SidebarComponent,
     ErrorMessageComponent,
+    UsersRankingComponent,
   ],
 
   imports: [

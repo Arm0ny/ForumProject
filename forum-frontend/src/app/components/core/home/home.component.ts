@@ -3,7 +3,7 @@ import { QuestionsInterface } from '../../../interfaces/questionsInterface';
 import { QuestionsService } from '../../../services/questions.service';
 import { CategoriesInterface } from '../../../interfaces/categories-interface';
 import { ApiResponseInterface } from '../../../interfaces/api-response-interface';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -12,44 +12,32 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class HomeComponent {
   private destroyed = new Subject();
-  apiResponse?: ApiResponseInterface;
+  apiResponse$?: Observable<ApiResponseInterface>;
   questions?: QuestionsInterface[];
+  cursorPage = '';
   constructor(private questionsService: QuestionsService) {}
 
   ngOnInit() {
-    this.questionsService
-      .apiResponseOf()
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((res) => {
-        this.apiResponse = res;
-        this.questions = res.data;
-      });
-    this.refreshQuestions();
+    this.apiResponse$ = this.questionsService.apiResponseOf();
+    this.apiResponse$.subscribe((res) => {
+      this.questions = res.data;
+      this.cursorPage = res.next_cursor;
+    });
   }
 
   refreshQuestions(page = '', categoryId: number | null = null) {
-    /* this.questionsService.getQuestions(page).subscribe((res) => {
-      this.apiResponse = res;
-      if (this.questions?.length === 0 || !this.questions) {
-        this.questions = res.data;
-        return;
-      }
-      //this.questions?.push(...res.data);
-    }); */
-    if (!this.questions || this.questions.length === 0) {
-      this.questionsService.getQuestions().subscribe((res) => this.apiResponse);
-    } else {
-      this.questionsService.getQuestions().subscribe((res) => {
-        this.apiResponse = res;
-      });
-    }
+    this.questionsService.getQuestions(page);
   }
 
   loadMore() {
-    if (this.apiResponse === undefined || !this.apiResponse.next_cursor) {
+    if (this.apiResponse$ === undefined || !this.cursorPage) {
       console.log('No more questions');
       return;
     }
-    this.refreshQuestions(this.apiResponse.next_cursor);
+    this.questionsService.setCursor(this.cursorPage);
+    this.apiResponse$.subscribe((res) => {
+      this.questions?.push(...res.data);
+      this.cursorPage = res.next_cursor;
+    });
   }
 }

@@ -11,11 +11,15 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Pagination\CursorPaginator
      */
     public function index()
     {
-        return Question::orderBy('id', 'desc')->cursorPaginate(10);
+        return Question::query()
+            ->select('questions.*' , 'users.profile_image', 'users.name')
+            ->join('users' , 'users.id' , 'questions.user_id')
+            ->orderBy('id', 'desc')
+            ->cursorPaginate(10);
     }
 
 
@@ -85,6 +89,12 @@ class QuestionController extends Controller
      */
 
     public function getByCategoryId($categoryId) {
-        return Question::orderBy('id', 'desc')->where('category_id', '=', $categoryId)->cursorPaginate(10);
+
+        return Question::query()
+            ->select('questions.*' , 'users.profile_image', 'users.name')
+            ->join('users' , 'users.id' , 'questions.user_id')
+            ->where('category_id','=', $categoryId)
+            ->orderBy('id', 'desc')
+            ->cursorPaginate(10);
     }
 }

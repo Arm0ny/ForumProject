@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,MAAM;EACJ,SAAS,EAAG,IAAI;EAChB,WAAW,EAAG,kBAAkB;EAChC,WAAW,EAAG,GAAG;EACjB,KAAK,EAAG,OAAO;;AAEjB,UAAU;EACR,UAAU,EAAE,gCAA4B",
+"mappings": "AAAA,MAAM;EACJ,SAAS,EAAG,IAAI;EAChB,WAAW,EAAG,kBAAkB;EAChC,WAAW,EAAG,GAAG;EACjB,KAAK,EAAG,OAAO;;AAEjB,UAAU;EACR,UAAU,EAAE,kCAA6B",
 "sources": ["register.component.sass"],
 "names": [],
 "file": "register.component.css"

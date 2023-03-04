@@ -1,0 +1,9 @@
+<div class="flex flex-col gap-6">
+  <h1 class="font-primary font-medium text-3xl">Top Members</h1>
+  <ul *ngIf="users" class="flex flex-col gap-4">
+    <li *ngFor="let user of users" class="flex gap-6">
+      <img class="rounded-full w-8 h-8" src="{{'/profile-images/' + user.profile_image | getDownloadURL}}" alt=""/>
+      <p>{{user.name}}</p>
+    </li>
+  </ul>
+</div>
