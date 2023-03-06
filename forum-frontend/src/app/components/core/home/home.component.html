@@ -1,5 +1,5 @@
 <main
-  *ngIf="questions"
+  *ngIf="apiResponse$ | async as  apiResponse"
   class="p-6 lg:p-20 flex max-md:flex-col gap-6 align-items-center h-full md:justify-between  lg:gap-32 mx-auto"
 >
   <section class="hidden md:block md:w-2/5 lg:1/5">
@@ -11,14 +11,17 @@
       class="flex justify-center align-items-center mt-6 md:hidden"
     >
     </app-category-selector>
-    <header class="font-primary text-bold text-lg text-center"><h1>{{questions.length}} Posts</h1></header>
+    <header class="font-primary text-bold text-lg text-center"><h1>{{apiResponse.data.length}} Posts</h1></header>
 
     <app-question
-      *ngFor="let question of questions"
+      *ngFor="let question of apiResponse.data"
       [question]="question"
       class="bg-secondary flex p-4 rounded max-h-1/4"
     ></app-question>
-    <a (click)="loadMore()">Load More!</a>
+    <span class="flex w-full items-center justify-center gap-6">
+      <button (click)="changePage('prev')" [disabled]="hasPage(apiResponse.prev_cursor)" class="p-4 bg-[#DAE0FF] rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="previous" class="h-4 w-4 rotate-180" /></button>
+      <button (click)="changePage('next')" [disabled]="hasPage(apiResponse.next_cursor)" class="p-4 bg-[#DAE0FF] rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="next" class="h-4 w-4" /></button>
+    </span>
     <a
       routerLink="/editor"
       class=" lg:hidden fixed bottom-10 right-6 p-2 w-20 h-20 rounded-full bg-[#4361EE]"

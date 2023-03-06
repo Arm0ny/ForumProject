@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {
   BehaviorSubject,
+  map,
   Observable,
   ReplaySubject,
   switchMap,
@@ -11,28 +12,26 @@ import { QuestionsInterface } from '../interfaces/questionsInterface';
 import { AuthService } from './auth/auth.service';
 import { ApiResponseInterface } from '../interfaces/api-response-interface';
 import { CategoriesInterface } from '../interfaces/categories-interface';
+
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionsService {
   baseUrl = 'http://127.0.0.1:8000/api/questions';
-  private categorySubject = new BehaviorSubject<number | null>(null);
-  cursor: string = '';
   apiBehavior$ = new BehaviorSubject<ApiResponseInterface>({
     data: [],
     next_cursor: '',
-    prev_page_url: '',
+    prev_cursor: '',
   });
+  private categorySubject = new BehaviorSubject<number | null>(null);
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   apiResponseOf(): Observable<ApiResponseInterface> {
     return this.apiBehavior$;
   }
-  getQuestions(
-    page = this.cursor,
-    category = this.categorySubject.getValue()
-  ): void {
+
+  getQuestions(page = '', category = this.categorySubject.getValue()): void {
     let url = category ? `${this.baseUrl}/category/${category}` : this.baseUrl;
     const params = new HttpParams().set('cursor', page);
     this.http.get<ApiResponseInterface>(url, { params }).subscribe((res) => {
@@ -66,7 +65,12 @@ export class QuestionsService {
     this.getQuestions();
   }
 
-  setCursor(page: string) {
-    this.cursor = page;
+  setCursor(action: string) {
+    let page = `${action}_cursor`;
+    this.getQuestions(
+      this.apiBehavior$.getValue()[
+        action === 'next' ? 'next_cursor' : 'prev_cursor'
+      ]
+    );
   }
 }

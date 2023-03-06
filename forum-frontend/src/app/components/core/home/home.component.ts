@@ -11,33 +11,19 @@ import { Observable, Subject, takeUntil, tap } from 'rxjs';
   styleUrls: ['./home.component.sass'],
 })
 export class HomeComponent {
-  private destroyed = new Subject();
   apiResponse$?: Observable<ApiResponseInterface>;
-  questions?: QuestionsInterface[];
-  cursorPage = '';
   constructor(private questionsService: QuestionsService) {}
 
   ngOnInit() {
     this.apiResponse$ = this.questionsService.apiResponseOf();
-    this.apiResponse$.subscribe((res) => {
-      this.questions = res.data;
-      this.cursorPage = res.next_cursor;
-    });
+    this.questionsService.getQuestions();
   }
 
-  refreshQuestions(page = '', categoryId: number | null = null) {
-    this.questionsService.getQuestions(page);
+  changePage(action: string) {
+    this.questionsService.setCursor(action);
   }
 
-  loadMore() {
-    if (this.apiResponse$ === undefined || !this.cursorPage) {
-      console.log('No more questions');
-      return;
-    }
-    this.questionsService.setCursor(this.cursorPage);
-    this.apiResponse$.subscribe((res) => {
-      this.questions?.push(...res.data);
-      this.cursorPage = res.next_cursor;
-    });
+  hasPage(cursor: string) {
+    return !cursor;
   }
 }

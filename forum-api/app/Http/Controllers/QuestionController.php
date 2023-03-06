@@ -18,7 +18,7 @@ class QuestionController extends Controller
         return Question::query()
             ->select('questions.*' , 'users.profile_image', 'users.name')
             ->join('users' , 'users.id' , 'questions.user_id')
-            ->orderBy('id', 'desc')
+            ->orderBy('questions.id', 'desc')
             ->cursorPaginate(10);
     }
 
@@ -94,7 +94,7 @@ class QuestionController extends Controller
             ->select('questions.*' , 'users.profile_image', 'users.name')
             ->join('users' , 'users.id' , 'questions.user_id')
             ->where('category_id','=', $categoryId)
-            ->orderBy('id', 'desc')
+            ->orderBy('questions.id', 'desc')
             ->cursorPaginate(10);
     }
 }

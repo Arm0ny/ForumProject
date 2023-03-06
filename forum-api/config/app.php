@@ -197,6 +197,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\FortifyServiceProvider::class,
+        Kreait\Laravel\Firebase\ServiceProvider::class,
+
 
     ],
 

@@ -29,12 +29,8 @@ export class CategorySelectorComponent implements OnInit {
     this.categoriesService.index().subscribe((res) => (this.categories = res));
   }
 
-  //function to emit the @Output event
-  setCategory(categoryId: number | null) {
-    this.setCategoryEvent.emit(categoryId);
-  }
-
   setCategorySubject(categoryId: number | null) {
+    this.questionsService.setCursor('');
     this.questionsService.setCategory(categoryId);
   }
 }
