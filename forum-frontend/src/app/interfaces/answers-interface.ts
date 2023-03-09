@@ -3,4 +3,7 @@ export interface AnswersInterface {
   question_id : number,
   content : string,
   isAnswer : boolean
+
+  name : string
+  profile_image: string
 }

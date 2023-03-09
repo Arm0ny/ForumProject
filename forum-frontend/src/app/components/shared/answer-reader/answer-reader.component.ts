@@ -11,10 +11,8 @@ import {AuthService} from "../../../services/auth/auth.service";
 export class AnswerReaderComponent implements OnInit {
   constructor(private authService : AuthService) { }
   @Input() answer! : AnswersInterface
-  answerUser! : UserInterface
 
   ngOnInit() {
-    this.authService.getUserById(this.answer.user_id)
-      .subscribe(res => this.answerUser = res)
+
   }
 }

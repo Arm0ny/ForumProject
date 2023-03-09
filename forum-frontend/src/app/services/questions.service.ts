@@ -73,4 +73,14 @@ export class QuestionsService {
       ]
     );
   }
+
+  deleteQuestion(questionId : number){
+    let question = this.apiBehavior$.getValue().data
+      .find((q) => q.id = questionId)
+
+    //active user check
+    if(true){
+      //Send Request to delete endpoint
+    }
+  }
 }

@@ -7,32 +7,26 @@
   </section>
 
   <section class="flex flex-col gap-6 align-items-center md:w-4/5 lg:w-2/5">
-    <app-category-selector
-      class="flex justify-center align-items-center mt-6 md:hidden"
-    >
+    <h1 *ngIf="activeUser$ | async as activeUser">{{activeUser.name}}</h1>
+    <app-category-selector class="flex justify-center align-items-center mt-6 md:hidden">
     </app-category-selector>
     <header class="font-primary text-bold text-lg text-center"><h1>{{apiResponse.data.length}} Posts</h1></header>
 
-    <app-question
-      *ngFor="let question of apiResponse.data"
-      [question]="question"
-      class="bg-secondary flex p-4 rounded max-h-1/4"
-    ></app-question>
+    <app-question *ngFor="let question of apiResponse.data" [question]="question"
+      class="bg-secondary flex p-4 rounded max-h-1/4">
+
+    </app-question>
     <span class="flex w-full items-center justify-center gap-6">
       <button (click)="changePage('prev')" [disabled]="hasPage(apiResponse.prev_cursor)" class="p-4 bg-[#DAE0FF] rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="previous" class="h-4 w-4 rotate-180" /></button>
       <button (click)="changePage('next')" [disabled]="hasPage(apiResponse.next_cursor)" class="p-4 bg-[#DAE0FF] rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="next" class="h-4 w-4" /></button>
     </span>
-    <a
-      routerLink="/editor"
-      class=" lg:hidden fixed bottom-10 right-6 p-2 w-20 h-20 rounded-full bg-[#4361EE]"
-      ><img
-        [src]="'/icons/plus-button.svg' | getDownloadURL"
-        alt="Ask Question"
-    /></a>
+    <a routerLink="/editor" class=" lg:hidden fixed bottom-10 right-6 p-2 w-20 h-20 rounded-full bg-[#4361EE]">
+      <img [src]="'/icons/plus-button.svg' | getDownloadURL" alt="Ask Question"/>
+    </a>
   </section>
 
   <section class="hidden lg:block lg:w-1/5 flex flex-col justify-center">
-    <header><h1 class="font-secondary font-medium text-[#20BE63]">Online</h1></header>
+    <header><h1 class="font-secondary font-medium text-[#20BE63]">Online</h1> <a routerLink="/logout" class="font-secondary font-medium text-danger">Logout</a></header>
     <a routerLink="/editor" class="flex justify-center text-center py-4 w-full bg-accent text-secondary font-secondary font-medium rounded mb-16">+ Create new Question</a>
     <app-users-ranking></app-users-ranking>
   </section>

@@ -1,10 +1,10 @@
 <article class="flex flex-col gap-4 bg-secondary rounded p-6 min-h-1/4">
   <header class="flex items-center gap-4">
     <img
-      [src]="'/profile-images/' + answerUser.profile_image | getDownloadURL"
-      [alt]="answerUser.name"
+      [src]="'/profile-images/' + answer.profile_image | getDownloadURL"
+      [alt]="answer.name"
     />
-    <h1 class="font-primary font-light">{{ answerUser.name }}</h1>
+    <h1 class="font-primary font-light">{{ answer.name }}</h1>
   </header>
   <div [innerHTML]="answer.content | markdownPipe" class=" font-primary font-normal"></div>
 </article>

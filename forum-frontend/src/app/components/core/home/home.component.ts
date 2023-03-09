@@ -4,6 +4,8 @@ import { QuestionsService } from '../../../services/questions.service';
 import { CategoriesInterface } from '../../../interfaces/categories-interface';
 import { ApiResponseInterface } from '../../../interfaces/api-response-interface';
 import { Observable, Subject, takeUntil, tap } from 'rxjs';
+import {UserInterface} from "../../../interfaces/user-interface";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-home',
@@ -12,11 +14,13 @@ import { Observable, Subject, takeUntil, tap } from 'rxjs';
 })
 export class HomeComponent {
   apiResponse$?: Observable<ApiResponseInterface>;
-  constructor(private questionsService: QuestionsService) {}
+  activeUser$?: Observable<UserInterface>
+  constructor(private questionsService: QuestionsService, private authService : AuthService) {}
 
   ngOnInit() {
     this.apiResponse$ = this.questionsService.apiResponseOf();
     this.questionsService.getQuestions();
+
   }
 
   changePage(action: string) {

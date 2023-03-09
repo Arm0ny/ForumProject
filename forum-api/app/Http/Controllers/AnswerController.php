@@ -12,11 +12,14 @@ class AnswerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return response(Answer::all());
+        return Answer::query()
+            ->select('answers.*, user.name, user.profile_image')
+            ->join('users' , 'users.id' , 'answers.user_id')
+            ->orderBy('questions.id', 'desc')
+            ->get();
     }
 
     /**
@@ -70,6 +73,12 @@ class AnswerController extends Controller
     }
 
     public function getByQuestionId($questionId){
-        return Question::find($questionId)->answers;
+        return Answer::query()
+            ->select('answers.*' , 'users.profile_image', 'users.name')
+            ->join('users' , 'users.id' , 'answers.user_id')
+            ->where('question_id','=', $questionId)
+            ->orderBy('answers.id', 'desc')
+            ->get();
+
     }
 }

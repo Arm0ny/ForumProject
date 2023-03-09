@@ -53,7 +53,7 @@ export class CreateProfileComponent implements OnInit {
     if (this.profileForm.valid && this.user) {
       this.authService
         .updateUser(this.user.id, {
-          profile_image: Md5.hashStr(this.user.name) + '.' + this.imageType,
+          profile_image: Md5.hashStr(this.user.name) + this.imageType,
         })
         .subscribe(
           (res) => {

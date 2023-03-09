@@ -45,7 +45,7 @@ class AuthController extends Controller
         }
 
         //return the response
-        return redirect()->route('oauth/authorize');
+        return $request->user();
     }
 
 }
