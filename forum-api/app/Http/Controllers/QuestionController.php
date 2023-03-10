@@ -97,4 +97,14 @@ class QuestionController extends Controller
             ->orderBy('questions.id', 'desc')
             ->cursorPaginate(10);
     }
+
+    public function getByTitle($partial){
+
+        return Question::query()
+            ->select('questions.*' , 'users.profile_image', 'users.name')
+            ->join('users' , 'users.id' , 'questions.user_id')
+            ->where('questions.title','like', '%'.$partial.'%')
+            ->orderBy('questions.id', 'desc')
+            ->cursorPaginate(10);
+    }
 }

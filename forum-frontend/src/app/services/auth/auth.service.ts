@@ -8,12 +8,10 @@ import { UserInterface } from '../../interfaces/user-interface';
 })
 export class AuthService {
   baseUrl = 'http://127.0.0.1:8000';
-  activeUser$ = new ReplaySubject<UserInterface>(1);
   private isAuthenticated$ = new BehaviorSubject<boolean>(false);
   redirectTo: string = ''
 
   constructor(private http: HttpClient) {
-    this.getUser()
   }
 
   setAuthenticated(value: boolean) {
@@ -24,11 +22,6 @@ export class AuthService {
 
   get authenticatedOf(): Observable<boolean> {
     return this.isAuthenticated$.asObservable()
-  }
-
-  userOf(): Observable<UserInterface> {
-    return this.activeUser$;
-
   }
 
   login(email: string, password: string): Observable<any> {
@@ -65,9 +58,8 @@ export class AuthService {
       );
   }
 
-  setUserBehavior(): void {
-    this.http.get<UserInterface>(this.baseUrl + '/api/user')
-      .subscribe(res => this.activeUser$.next(res))
+  logout(){
+    this.setAuthenticated(false)
   }
 
   getUser(): Observable<UserInterface> {

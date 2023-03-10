@@ -6,6 +6,7 @@ import { AnswersService } from '../../../services/answers.service';
 import { AnswersInterface } from '../../../interfaces/answers-interface';
 import { UserInterface } from '../../../interfaces/user-interface';
 import { AuthService } from '../../../services/auth/auth.service';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-question-details',
@@ -13,7 +14,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrls: ['./question-details.component.sass'],
 })
 export class QuestionDetailsComponent implements OnInit {
-  answers?: AnswersInterface[];
+  answers$?: Observable<AnswersInterface[]>;
   constructor(
     private questionService: QuestionsService,
     private route: ActivatedRoute,
@@ -29,11 +30,8 @@ export class QuestionDetailsComponent implements OnInit {
       this.questionService
         .getById(this.questionId)
         .subscribe((res) => (this.question = res));
-
-      this.answersService
-        .getByQuestionId(this.questionId)
-        .subscribe((res) => (this.answers = res));
-
+      this.answers$ = this.answersService.answersOf
+      this.answersService.getByQuestionId(this.questionId)
       this.authService.getUser().subscribe((res) => (this.user = res));
     }
   }

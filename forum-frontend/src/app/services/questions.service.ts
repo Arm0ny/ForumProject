@@ -39,6 +39,13 @@ export class QuestionsService {
     });
   }
 
+  searchQuestions(partial : string, page : string = ''){
+    const params = new HttpParams().set('cursor', page);
+    this.http.get<ApiResponseInterface>(`${this.baseUrl}/search/${partial}`, { params }).subscribe((res) => {
+      this.apiBehavior$.next(res);
+    });
+  }
+
   store(
     title: string,
     content: string,

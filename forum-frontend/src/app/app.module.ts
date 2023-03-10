@@ -36,6 +36,7 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { ErrorMessageComponent } from './components/shared/error-message/error-message.component';
 import { UsersRankingComponent } from './components/shared/users-ranking/users-ranking.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
+import { SearchbarComponent } from './components/shared/searchbar/searchbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { LogoutComponent } from './components/auth/logout/logout.component';
     ErrorMessageComponent,
     UsersRankingComponent,
     LogoutComponent,
+    SearchbarComponent,
   ],
 
   imports: [

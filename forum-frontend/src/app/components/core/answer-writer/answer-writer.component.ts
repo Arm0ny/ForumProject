@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {AnswersService} from "../../../services/answers.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-answer-writer',
@@ -9,7 +9,7 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./answer-writer.component.sass']
 })
 export class AnswerWriterComponent {
-  constructor(private answerService : AnswersService, private route : ActivatedRoute) { }
+  constructor(private answerService : AnswersService,private router: Router, private route : ActivatedRoute) { }
   answerForm = new FormGroup({
     content : new FormControl(null, Validators.required),
   })
@@ -21,8 +21,8 @@ export class AnswerWriterComponent {
     let content = this.answerForm.get('content')?.getRawValue()
     this.answerService.store(question_id, content)
       .subscribe(
-        res => (res),
-        err => console.log(err))
+        res => this.answerService.getByQuestionId(question_id),
+        err => this.router.navigate([``]))
     }
 
 

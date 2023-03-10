@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "./auth/auth.service";
-import {Observable, switchMap} from "rxjs";
+import {Observable, ReplaySubject, switchMap} from "rxjs";
 import {AnswersInterface} from "../interfaces/answers-interface";
 import {QuestionsInterface} from "../interfaces/questionsInterface";
 
@@ -9,10 +9,15 @@ import {QuestionsInterface} from "../interfaces/questionsInterface";
   providedIn: 'root'
 })
 export class AnswersService {
+  private answersSubject$ = new ReplaySubject<AnswersInterface[]>(1)
+  baseUrl = 'http://127.0.0.1:8000/api/answer'
 
   constructor(private http : HttpClient, private authService : AuthService) { }
 
-  baseUrl = 'http://127.0.0.1:8000/api/answer'
+  get answersOf(): Observable<AnswersInterface[]>{
+    return this.answersSubject$
+  }
+
   store(question_id : string, content : string): Observable<AnswersInterface>{
     return this.authService.getUser()
       .pipe(
@@ -27,8 +32,11 @@ export class AnswersService {
         ));
   }
 
-  getByQuestionId(question_id : string) : Observable<AnswersInterface[]>{
-    return this.http.get<AnswersInterface[]>(this.baseUrl + `/question/${question_id}`)
+  getByQuestionId(question_id : string){
+    this.http.get<AnswersInterface[]>(this.baseUrl + `/question/${question_id}`)
+      .subscribe(res => {
+        this.answersSubject$.next(res)
+      })
   }
 
   getByUserId(user_id : string) : Observable<AnswersInterface[]>{

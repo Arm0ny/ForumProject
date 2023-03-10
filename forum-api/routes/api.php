@@ -40,6 +40,7 @@ Route::prefix('questions')->group(function () {
     Route::middleware('auth:sanctum')->post('', [QuestionController::class, 'store']);
     Route::get('/user/{userId}', [QuestionController::class, 'getByUserId']);
     Route::get('/category/{categoryId}', [QuestionController::class, 'getByCategoryId']);
+    Route::get('/search/{title}', [QuestionController::class, 'getByTitle']);
 });
 
 Route::resource('categories', CategoryController::class);

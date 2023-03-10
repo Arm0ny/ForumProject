@@ -12,7 +12,7 @@
   </section>
 
   <section class="flex flex-col gap-10">
-    <ng-container *ngIf="answers && answers.length">
+    <ng-container *ngIf="answers$ | async as answers">
       <app-answer-reader *ngFor="let answer of answers" [answer]="answer"></app-answer-reader>
     </ng-container>
   </section>
