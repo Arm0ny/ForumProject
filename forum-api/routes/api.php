@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/user/authenticated', function(Request $request){
     return !!$request->user();
 });
+Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::prefix('user')->group(function(){
     Route::get('/{id}', [UserController::class, 'show']);

@@ -24,7 +24,6 @@ export class LoginComponent implements OnDestroy {
     let password = this.loginForm.get('password')?.getRawValue();
     this.loginSub = this.authService.login(email, password).subscribe(
       (res) => {
-        this.authService.setAuthenticated(true)
         this.router.navigate(['']);
       },
       (err) => {

@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'questions/:id', component: QuestionDetailsComponent },
   {path: 'editor', component: EditorDetailsComponent, canActivate: [AuthGuard]},
   { path: 'create-profile', component: CreateProfileComponent },
-  {path: 'logout', component: LogoutComponent, canActivate: [LoggedInGuard]}
+  {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

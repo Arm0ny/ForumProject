@@ -48,7 +48,6 @@ export class RegisterComponent implements OnInit {
       .register(name, email, password, password_confirmation)
       .subscribe(
         (res) => {
-          this.authService.setAuthenticated(true)
           this.router.navigate(['create-profile']);
         },
         (err) => {

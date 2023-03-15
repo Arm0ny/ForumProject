@@ -8,20 +8,18 @@ import { UserInterface } from '../../interfaces/user-interface';
 })
 export class AuthService {
   baseUrl = 'http://127.0.0.1:8000';
-  private isAuthenticated$ = new BehaviorSubject<boolean>(false);
-  redirectTo: string = ''
+  isAuthenticated$ = this.isAuthenticated();
+  activeUser$ = this.getUser()
 
   constructor(private http: HttpClient) {
   }
 
-  setAuthenticated(value: boolean) {
-    this.isAuthenticated$.next(value)
-    console.log(this.isAuthenticated$.getValue()
-    )
+  isAuthenticated() : Observable<boolean>{
+    return this.http.get<boolean>(this.baseUrl + '/api/user/authenticated')
   }
 
   get authenticatedOf(): Observable<boolean> {
-    return this.isAuthenticated$.asObservable()
+    return this.isAuthenticated$
   }
 
   login(email: string, password: string): Observable<any> {
@@ -59,7 +57,7 @@ export class AuthService {
   }
 
   logout(){
-    this.setAuthenticated(false)
+    return this.http.get(this.baseUrl + '/api/logout')
   }
 
   getUser(): Observable<UserInterface> {
