@@ -18,6 +18,7 @@ export class HomeComponent {
   constructor(private questionsService: QuestionsService, private authService : AuthService) {}
 
   ngOnInit() {
+    this.activeUser$ = this.authService.activeUserOf
     this.apiResponse$ = this.questionsService.apiResponseOf();
     this.questionsService.getQuestions();
 

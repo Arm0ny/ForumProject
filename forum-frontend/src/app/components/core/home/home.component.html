@@ -26,7 +26,7 @@
   </section>
 
   <section class="hidden lg:block lg:w-1/5 flex flex-col justify-center">
-    <header><h1 class="font-secondary font-medium text-[#20BE63]">Online</h1> <a routerLink="/logout" class="font-secondary font-medium text-danger">Logout</a></header>
+    <header *ngIf="activeUser$ | async" class="flex justify-between"><h1 class="font-secondary font-medium text-[#20BE63]">Online</h1> <a routerLink="/logout" class="font-secondary font-medium text-danger">Logout</a></header>
     <a routerLink="/editor" class="flex justify-center text-center py-4 w-full bg-accent text-secondary font-secondary font-medium rounded mb-16">+ Create new Question</a>
     <app-users-ranking></app-users-ranking>
   </section>

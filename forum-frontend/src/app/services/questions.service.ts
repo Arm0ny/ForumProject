@@ -4,7 +4,7 @@ import {
   BehaviorSubject,
   map,
   Observable,
-  ReplaySubject,
+  Subject,
   switchMap,
   tap,
 } from 'rxjs';
@@ -34,7 +34,8 @@ export class QuestionsService {
   getQuestions(page = '', category = this.categorySubject.getValue()): void {
     let url = category ? `${this.baseUrl}/category/${category}` : this.baseUrl;
     const params = new HttpParams().set('cursor', page);
-    this.http.get<ApiResponseInterface>(url, { params }).subscribe((res) => {
+    this.http.get<ApiResponseInterface>(url, { params })
+      .subscribe((res) => {
       this.apiBehavior$.next(res);
     });
   }
@@ -63,8 +64,8 @@ export class QuestionsService {
     );
   }
 
-  getById(questionId: string): Observable<QuestionsInterface> {
-    return this.http.get<QuestionsInterface>(this.baseUrl + `/${questionId}`);
+  getActiveQuestion(questionId: string): Observable<QuestionsInterface> {
+    return this.http.get<QuestionsInterface>(`${this.baseUrl}/${questionId}`);
   }
 
   setCategory(categoryId: number | null) {
@@ -81,13 +82,7 @@ export class QuestionsService {
     );
   }
 
-  deleteQuestion(questionId : number){
-    let question = this.apiBehavior$.getValue().data
-      .find((q) => q.id = questionId)
-
-    //active user check
-    if(true){
-      //Send Request to delete endpoint
-    }
+  deleteQuestion(questionId : number | string) : Observable<QuestionsInterface>{
+    return this.http.delete<QuestionsInterface>(`${this.baseUrl}/${questionId}`)
   }
 }

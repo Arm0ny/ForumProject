@@ -11,7 +11,7 @@ import { AuthService } from '../../../services/auth/auth.service';
   styleUrls: ['./question.component.sass'],
 })
 export class QuestionComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private questionsService : QuestionsService) {}
 
   @Input() question!: QuestionsInterface;
 

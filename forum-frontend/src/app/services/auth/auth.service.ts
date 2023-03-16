@@ -9,7 +9,7 @@ import { UserInterface } from '../../interfaces/user-interface';
 export class AuthService {
   baseUrl = 'http://127.0.0.1:8000';
   isAuthenticated$ = this.isAuthenticated();
-  activeUser$ = this.getUser()
+  private activeUser$ = this.getUser()
 
   constructor(private http: HttpClient) {
   }
@@ -20,6 +20,10 @@ export class AuthService {
 
   get authenticatedOf(): Observable<boolean> {
     return this.isAuthenticated$
+  }
+
+  get activeUserOf() : Observable<UserInterface>{
+    return this.activeUser$
   }
 
   login(email: string, password: string): Observable<any> {

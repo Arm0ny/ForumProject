@@ -65,10 +65,6 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        return response(Question::destroy($id));
-    }
 
     /**
      * Get Questions by the user_id foreign key
@@ -106,5 +102,14 @@ class QuestionController extends Controller
             ->where('questions.title','like', '%'.$partial.'%')
             ->orderBy('questions.id', 'desc')
             ->cursorPaginate(10);
+    }
+
+    public function destroy(Request $request, $questionId){
+        $question = Question::findOrFail($questionId);
+        if($request->user()->id != $question->user_id){
+            abort(401, "You are not the Owner of this Question");
+        }
+
+        return $question->delete();
     }
 }

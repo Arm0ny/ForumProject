@@ -39,6 +39,7 @@ Route::prefix('questions')->group(function () {
     Route::get('', [QuestionController::class, 'index']);
     Route::get('/{id}', [QuestionController::class, 'show']);
     Route::middleware('auth:sanctum')->post('', [QuestionController::class, 'store']);
+    Route::delete('/{questionId}', [QuestionController::class, 'destroy']);
     Route::get('/user/{userId}', [QuestionController::class, 'getByUserId']);
     Route::get('/category/{categoryId}', [QuestionController::class, 'getByCategoryId']);
     Route::get('/search/{title}', [QuestionController::class, 'getByTitle']);
