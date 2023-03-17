@@ -14,10 +14,6 @@ export class AnswersService {
 
   constructor(private http : HttpClient, private authService : AuthService) { }
 
-  get answersOf(): Observable<AnswersInterface[]>{
-    return this.answersSubject$
-  }
-
   store(question_id : string, content : string): Observable<AnswersInterface>{
     return this.authService.getUser()
       .pipe(
@@ -33,10 +29,7 @@ export class AnswersService {
   }
 
   getByQuestionId(question_id : string){
-    this.http.get<AnswersInterface[]>(this.baseUrl + `/question/${question_id}`)
-      .subscribe(res => {
-        this.answersSubject$.next(res)
-      })
+    return this.http.get<AnswersInterface[]>(this.baseUrl + `/question/${question_id}`)
   }
 
   getByUserId(user_id : string) : Observable<AnswersInterface[]>{

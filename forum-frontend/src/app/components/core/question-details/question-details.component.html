@@ -6,7 +6,7 @@
         <span *ngIf="activeUser$ | async as activeUser" class="flex gap-2">
             <ng-container *ngIf="activeUser.id === question.user_id">
               <button (click)="onEdit()">Edit</button>
-              <button (click)="onDelete()">Delete</button>
+              <button (click)="onDelete(question.id)">Delete</button>
             </ng-container>
         </span>
       </header>
@@ -24,4 +24,5 @@
       <app-answer-reader *ngFor="let answer of answers" [answer]="answer"></app-answer-reader>
     </ng-container>
   </section>
+  <ng-container *ngIf="deleteStream$ | async"></ng-container>
 </main>
