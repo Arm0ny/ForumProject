@@ -13,7 +13,7 @@ import {catchError, filter, map, Observable, Subject, switchMap, tap, throwError
   templateUrl: './question-details.component.html',
   styleUrls: ['./question-details.component.sass'],
 })
-export class QuestionDetailsComponent {
+export class QuestionDetailsComponent implements OnInit {
   constructor(
     private questionService: QuestionsService,
     private router: Router,
@@ -21,38 +21,37 @@ export class QuestionDetailsComponent {
     private answersService: AnswersService,
     private authService: AuthService
   ) {}
-  private readonly activeQuestionId$: Observable<string> =
-    this.route.paramMap.pipe(
-      map((paramMap) => paramMap.get('id')),
-      filter(Boolean)
-    );
-  readonly activeQuestion$: Observable<QuestionsInterface> =
-    this.activeQuestionId$.pipe(
-      switchMap((questionId) =>
-        this.questionService.getActiveQuestion(questionId)
-      )
-    );
-
-  readonly answers$: Observable<AnswersInterface[]> =
-    this.activeQuestionId$.pipe(
-      switchMap((questionId) => this.answersService.getByQuestionId(questionId))
-    );
+  question$? : Observable<QuestionsInterface>
 
   readonly activeUser$ = this.authService.activeUserOf;
 
   deleteId$ = new Subject<number>();
+  answers$?: Observable<AnswersInterface[]>
 
   deleteStream$ = this.deleteId$.pipe(
-    switchMap(deleteId =>
+    switchMap((deleteId) =>
       this.questionService.deleteQuestion(deleteId).pipe(
-        tap(() => this.router.navigate([""])),
+        tap(() => this.router.navigate([''])),
         catchError((error) => {
-          console.log("question has not been deleted");
-          return throwError(() => error)
+          console.log('question has not been deleted');
+          return throwError(() => error);
         })
       )
     )
   );
+
+  ngOnInit() {
+    const questionId$ = this.route.paramMap.pipe(
+      map((paramMap) => paramMap.get('id')),
+      filter(Boolean)
+    );
+    this.question$ = questionId$.pipe(
+      switchMap((questionId$ => this.questionService.getActiveQuestion(questionId$)))
+    )
+    this.answers$ = questionId$.pipe(
+      switchMap(questionId => this.answersService.getByQuestionId(questionId))
+    )
+  }
 
   onEdit() {
     console.log('edit');

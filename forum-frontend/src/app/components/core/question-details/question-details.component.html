@@ -1,4 +1,4 @@
-<main *ngIf="activeQuestion$ | async as question" class="flex flex-col p-8 gap-10 lg:w-1/2 lg:m-auto">
+<main *ngIf="question$ | async as question" class="flex flex-col p-8 gap-10 lg:w-1/2 lg:m-auto">
   <section class="flex flex-col gap-10">
     <article *ngIf="question" class="flex flex-col bg-secondary rounded p-6 gap-6">
       <header class="flex gap-4">
