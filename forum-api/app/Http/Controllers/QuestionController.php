@@ -53,9 +53,12 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $questionId)
     {
-        $question =  Question::find($id);
+        $question =  Question::find($questionId);
+        if($request->user()->id != $question->user_id){
+            abort(401, "You are not the Owner of this Question");
+        }
         return response(Question::update($request->all()));
     }
 

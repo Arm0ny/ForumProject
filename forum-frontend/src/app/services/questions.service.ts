@@ -82,7 +82,11 @@ export class QuestionsService {
     );
   }
 
-  deleteQuestion(questionId : number | string) : Observable<QuestionsInterface>{
+  delete(questionId : number | string) : Observable<QuestionsInterface>{
     return this.http.delete<QuestionsInterface>(`${this.baseUrl}/${questionId}`)
+  }
+
+  edit(questionId : number | string, body : object) : Observable<QuestionsInterface>{
+    return this.http.put<QuestionsInterface>(`${this.baseUrl}/${questionId}`, body)
   }
 }

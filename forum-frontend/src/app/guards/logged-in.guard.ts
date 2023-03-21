@@ -14,7 +14,6 @@ export class LoggedInGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.authService.authenticatedOf.pipe(
       map((authenticated: boolean) => {
-        console.log(authenticated);
         if (authenticated) {
           return this.router.parseUrl('')
         }
