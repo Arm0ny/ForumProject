@@ -1,5 +1,5 @@
 <form *ngIf="writerForm" [formGroup]="writerForm" (ngSubmit)="onSubmit()">
-  <select formControlName="category" *ngIf="categories">
+  <select formControlName="category" *ngIf="categories$ | async as categories">
     <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
   </select>
   <input type="text" formControlName="title"/>

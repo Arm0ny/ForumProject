@@ -1,49 +1,83 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CategoriesService} from "../../../services/categories.service";
 import {CategoriesInterface} from "../../../interfaces/categories-interface";
 import {QuestionsService} from "../../../services/questions.service";
-import {catchError} from "rxjs";
+import {catchError, Subject, takeUntil} from "rxjs";
+import {Router} from "@angular/router";
+import {QuestionsInterface} from "../../../interfaces/questionsInterface";
 
 @Component({
   selector: 'app-editor-writer',
   templateUrl: './editor-writer.component.html',
-  styleUrls: ['./editor-writer.component.sass']
+  styleUrls: ['./editor-writer.component.sass'],
 })
-export class EditorWriterComponent implements OnInit{
-  constructor(private categoriesService : CategoriesService, private questionsService : QuestionsService) { }
-   @Output() sendMarkedString = new EventEmitter<string>()
+export class EditorWriterComponent implements OnDestroy {
+  private destroy$ = new Subject<void>();
+  constructor(
+    private categoriesService: CategoriesService,
+    private questionsService: QuestionsService,
+    private router: Router
+  ) {}
+  @Output() sendMarkedString = new EventEmitter<string>();
+
+  categories$ = this.categoriesService.categoriesOf();
+  @Input() action: string = 'store';
+  @Input() question: QuestionsInterface = {
+    category_id: 0,
+    content: '',
+    id: 0,
+    points: 0,
+    title: '',
+  };
+
   writerForm = new FormGroup({
-    title: new FormControl(null, Validators.required),
-    category: new FormControl(null, Validators.required),
-    content: new FormControl(null, Validators.required),
+    title: new FormControl('', Validators.required),
+    category: new FormControl(0, Validators.required),
+    content: new FormControl('', Validators.required),
   });
-  categories? : CategoriesInterface[]
 
-
-    ngOnInit() {
-      this.categoriesService.index()
-        .subscribe(res => this.categories = res)
-    }
+  ngOnInit() {
+    this.writerForm.setValue({
+      title: this.question.title,
+      category: this.question.category_id,
+      content: this.question.content,
+    });
+  }
 
   onInput(event: Event) {
-    this.sendMarkedString.emit((<HTMLInputElement>event.target).value)
+    this.sendMarkedString.emit((<HTMLInputElement>event.target).value);
   }
 
   onSubmit() {
-    if(!this.writerForm.valid) {
-      return
+    if (!this.writerForm.valid) {
+      return;
     }
-    let title = this.writerForm.get('title')?.getRawValue()
-    let content = this.writerForm.get('content')?.getRawValue()
-    let category_id = this.writerForm.get('category')?.getRawValue()
+    this.question.title = this.writerForm.get('title')?.getRawValue();
+    this.question.content = this.writerForm.get('content')?.getRawValue();
+    this.question.category_id = this.writerForm.get('category')?.getRawValue();
+    return this.action === 'store' ? this.onStore() : this.onEdit();
+  }
 
-
-    return this.questionsService.store(title, content, category_id)
-      .subscribe(
-        res => console.log(res),
-        err => console.log(err)
+  onStore() {
+    this.questionsService
+      .store(
+        this.question.title,
+        this.question.content,
+        this.question.category_id
       )
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res) => this.router.navigate([`questions`, res.id]));
+  }
 
+  onEdit() {
+    this.questionsService
+      .edit(this.question)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res) => this.router.navigate([`questions`, this.question.id]));
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next()
   }
 }

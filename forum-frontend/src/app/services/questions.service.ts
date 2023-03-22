@@ -47,10 +47,7 @@ export class QuestionsService {
     });
   }
 
-  store(
-    title: string,
-    content: string,
-    category_id: number
+  store(title: string, content: string, category_id: number
   ): Observable<QuestionsInterface> {
     return this.authService.getUser().pipe(
       switchMap((user) =>
@@ -86,7 +83,11 @@ export class QuestionsService {
     return this.http.delete<QuestionsInterface>(`${this.baseUrl}/${questionId}`)
   }
 
-  edit(questionId : number | string, body : object) : Observable<QuestionsInterface>{
-    return this.http.put<QuestionsInterface>(`${this.baseUrl}/${questionId}`, body)
+  edit(question : QuestionsInterface) : Observable<QuestionsInterface>{
+    return this.http.put<QuestionsInterface>(`${this.baseUrl}/${question.id}`, {
+      id: question.id,
+      title: question.title,
+      content: question.content
+    });
   }
 }

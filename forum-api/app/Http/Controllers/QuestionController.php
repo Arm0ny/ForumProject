@@ -59,7 +59,7 @@ class QuestionController extends Controller
         if($request->user()->id != $question->user_id){
             abort(401, "You are not the Owner of this Question");
         }
-        return response(Question::update($request->all()));
+        return response($question->update($request->all()));
     }
 
     /**

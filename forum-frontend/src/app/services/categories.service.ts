@@ -9,9 +9,15 @@ import {CategoriesInterface} from "../interfaces/categories-interface";
 export class CategoriesService {
 
   baseUrl = 'http://127.0.0.1:8000/api/categories'
+  private categories$ = this.index()
   constructor( private http : HttpClient) { }
 
-  index(): Observable<CategoriesInterface[]>{
+  categoriesOf() : Observable<CategoriesInterface[]>{
+    return this.categories$
+  }
+
+  index():
+    Observable<CategoriesInterface[]>{
     return this.http.get<CategoriesInterface[]>(this.baseUrl)
   }
 }

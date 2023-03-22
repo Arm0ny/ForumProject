@@ -12,6 +12,9 @@ import {catchError, filter, map, Observable, Subject, switchMap, takeUntil, tap,
 })
 export class QuestionDetailsComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
+  editMode: boolean = false;
+  deleteAlert = false
+
   constructor(
     private questionService: QuestionsService,
     private router: Router,
@@ -21,7 +24,6 @@ export class QuestionDetailsComponent implements OnDestroy {
   ) {}
   readonly activeUser$ = this.authService.activeUserOf;
 
-  alert = false
 
   questionId$ = this.route.paramMap.pipe(
     map((paramMap) => paramMap.get('id')),
@@ -39,7 +41,7 @@ export class QuestionDetailsComponent implements OnDestroy {
   );
 
   onEdit() {
-    console.log('edit');
+    this.editMode = true
   }
 
   onDelete(deleteId: number) {
@@ -57,7 +59,7 @@ export class QuestionDetailsComponent implements OnDestroy {
   }
 
   showAlert(){
-    this.alert = !this.alert
+    this.deleteAlert = !this.deleteAlert
   }
 
   ngOnDestroy() {
