@@ -3,7 +3,7 @@
     <header class=" p-8 container flex gap-8 items-center bg-secondary rounded w-full"><img [src]="'profile-images/' + user.profile_image | getDownloadURL" alt="profile_image" class="h-16 w-16"> <h2>{{user.name}}</h2></header>
   </article>
 
-  <section>
+  <section class="flex max-md:flex-col justify-center items-center lg:items-start gap-8">
     <article *ngIf="questions$ |async as questions" class="container p-4 flex flex-col gap-8 justify-center items-center">
       <h1 class="font-primary font-extralight text-lg">Questions you asked</h1>
       <span *ngFor="let question of questions" [routerLink]="'/questions/' + question.id" class="rounded bg-accent-light p-4 cursor-pointer w-full">
