@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,UAAU;EACR,UAAU,EAAE,kCAA6B",
+"sources": ["user-details.component.sass"],
+"names": [],
+"file": "user-details.component.css"
+}

@@ -9,6 +9,7 @@ module.exports = {
       danger: "#fecdd3",
       none: "rgba(0,0,0,0%)",
       textColor: "#1d1d1d",
+      'accent-light' : '#F4F6FF'
     },
 
     fontFamily: {

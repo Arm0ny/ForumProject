@@ -1,0 +1,21 @@
+<main *ngIf="user$ | async as user" class="p-4 flex flex-col gap-6">
+  <article class=" flex flex-col items-center rounded p-8 w-full">
+    <header class=" p-8 container flex gap-8 items-center bg-secondary rounded w-full"><img [src]="'profile-images/' + user.profile_image | getDownloadURL" alt="profile_image" class="h-16 w-16"> <h2>{{user.name}}</h2></header>
+  </article>
+
+  <section>
+    <article *ngIf="questions$ |async as questions" class="container p-4 flex flex-col gap-8 justify-center items-center">
+      <h1 class="font-primary font-extralight text-lg">Questions you asked</h1>
+      <span *ngFor="let question of questions" [routerLink]="'/questions/' + question.id" class="rounded bg-accent-light p-4 cursor-pointer w-full">
+        <h1>{{question.title}}</h1>
+      </span>
+    </article>
+
+    <article *ngIf="answers$ |async as answers" class="container p-4 flex flex-col gap-8 justify-center items-center">
+      <h1 class="font-primary font-extralight text-lg">Answers you wrote</h1>
+      <span *ngFor="let answer of answers" [routerLink]="'/questions/' + answer.question_id" class="rounded bg-accent-light p-4 cursor-pointer w-full">
+        <h1>{{answer.content | getSlug}}</h1>
+      </span>
+    </article>
+  </section>
+</main>

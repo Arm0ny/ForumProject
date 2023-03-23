@@ -90,4 +90,8 @@ export class QuestionsService {
       content: question.content
     });
   }
+
+  getByUserId(userId : number) : Observable<QuestionsInterface[]>{
+    return this.http.get<QuestionsInterface[]>(`${this.baseUrl}/user/${userId}`)
+  }
 }
