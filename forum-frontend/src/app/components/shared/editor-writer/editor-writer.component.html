@@ -1,8 +1,10 @@
-<form *ngIf="writerForm" [formGroup]="writerForm" (ngSubmit)="onSubmit()">
-  <select formControlName="category" *ngIf="categories$ | async as categories">
-    <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
-  </select>
-  <input type="text" formControlName="title"/>
-  <textarea formControlName="content" (input)="onInput($event)"></textarea>
-  <button type="submit" [disabled]="!writerForm.valid">Submit</button>
+<form *ngIf="writerForm" [formGroup]="writerForm" (ngSubmit)="onSubmit()" class="p-4 flex flex-col items-center gap-8">
+  <fieldset class="flex gap-2">
+    <select formControlName="category" *ngIf="categories$ | async as categories" class="bg-accent-light">
+      <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+    </select>
+    <input type="text" formControlName="title" placeholder="title here" class="bg-accent-light p-2 rounded shadow-inner w-full"/>
+  </fieldset>
+  <textarea formControlName="content" (input)="onInput($event)" placeholder="content here" class="w-full bg-accent-light rounded shadow-inner p-2"></textarea>
+  <button type="submit" [disabled]="!writerForm.valid" class="p-4 bg-accent rounded text-secondary">Submit</button>
 </form>
