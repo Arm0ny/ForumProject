@@ -7,9 +7,15 @@
   </section>
 
   <section class="flex flex-col gap-6 align-items-center md:w-4/5 lg:w-2/5">
-    <h1 *ngIf="activeUser$ | async as activeUser">{{activeUser.name}}</h1>
     <app-category-selector class="flex justify-center align-items-center mt-6 md:hidden">
     </app-category-selector>
+
+    <span *ngIf="activeUser$ | async as activeUser else logInBlock" class="flex gap-2 justify-center items-center">
+      <p>Logged in as {{activeUser.name}}</p>
+      <img [src]="'/profile-images/' + activeUser.profile_image | getDownloadURL" alt="profile-image" class="h-8 w-8"/>
+    </span>
+    <ng-template #logInBlock><a routerLink="/login">Log In!</a></ng-template>
+
     <header class="font-primary text-bold text-lg text-center"><h1>{{apiResponse.data.length}} Posts</h1></header>
 
     <app-question *ngFor="let question of apiResponse.data" [question]="question"

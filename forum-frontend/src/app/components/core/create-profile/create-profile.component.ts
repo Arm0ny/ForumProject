@@ -9,58 +9,47 @@ import { UserInterface } from '../../../interfaces/user-interface';
 import { Md5 } from 'ts-md5';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-create-profile',
   templateUrl: './create-profile.component.html',
   styleUrls: ['./create-profile.component.sass'],
 })
-export class CreateProfileComponent implements OnInit {
+export class CreateProfileComponent {
   constructor(
     private fireStorageService: AngularFireStorage,
     private authService: AuthService,
     private router: Router
   ) {}
-  user?: UserInterface;
+  activeUser$ = this.authService.activeUserOf;
   profileForm = new FormGroup({
     profileImage: new FormControl(null, Validators.required),
   });
-  ngOnInit() {
-    this.authService.getUser().subscribe(
-      (res) => (this.user = res),
-      (err) => console.log(err)
-    );
-  }
 
   ref!: AngularFireStorageReference;
   task!: AngularFireUploadTask;
 
-  imageType!: string;
-
-  upload(event: Event) {
+  upload(event: Event, user : UserInterface) {
     let input = <HTMLInputElement>event.target;
-    if (input.files === null || !this.user) {
+    if (input.files === null) {
       return;
     }
-    const id = Md5.hashStr(this.user.name);
-    this.ref = this.fireStorageService.ref(`profile-images/${id}`);
-    console.log(input.files[0]);
+    this.ref = this.fireStorageService.ref(`profile-images/${Md5.hashStr(user.name)}`);
     this.task = this.ref.put(input.files[0]);
-    this.imageType = `.${input.files[0].type.split('/')[1]}`;
   }
 
-  onSubmit() {
-    if (this.profileForm.valid && this.user) {
+  onSubmit(user : UserInterface) {
+    if (this.profileForm.valid) {
       this.authService
-        .updateUser(this.user.id, {
-          profile_image: Md5.hashStr(this.user.name) + this.imageType,
+        .updateUser(user.id, {
+          profile_image: Md5.hashStr(user.name),
         })
         .subscribe(
           (res) => {
-            this.router.navigate(['']);
+            this.router.navigate(['/profile']);
             console.log(res);
           },
-          (err) => console.log(err)
         );
     }
   }

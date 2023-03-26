@@ -1,6 +1,8 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <label for="profile-image"></label>
-  <input formControlName="profileImage" (change)="upload($event)" type="file" id="profile-image" accept=".jpg, .png"/>
-  <button type="submit">Save!</button>
-</form>
+<main *ngIf="activeUser$ | async as user" class="flex p-4 justify-center">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit(user)" class="bg-secondary flex flex-col rounded p-4 gap-4">
+    <label for="profile-image"></label>
+    <input formControlName="profileImage" (change)="upload($event, user)" type="file" id="profile-image" accept=".jpg, .png" class="file:bg-accent-light file:rounded file:p-2 file:border-none"/>
+    <button type="submit" class="p-4 bg-accent rounded text-secondary w-1/2 m-auto">Save!</button>
+  </form>
+</main>
 
