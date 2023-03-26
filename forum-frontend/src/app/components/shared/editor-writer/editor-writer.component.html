@@ -1,5 +1,5 @@
-<form *ngIf="writerForm" [formGroup]="writerForm" (ngSubmit)="onSubmit()" class="p-4 flex flex-col items-center gap-8">
-  <fieldset class="flex gap-2">
+<form *ngIf="writerForm" [formGroup]="writerForm" (ngSubmit)="onSubmit()" class="p-8 flex flex-col items-center gap-8">
+  <fieldset class="flex gap-2 w-full">
     <select formControlName="category" *ngIf="categories$ | async as categories" class="bg-accent-light">
       <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
     </select>

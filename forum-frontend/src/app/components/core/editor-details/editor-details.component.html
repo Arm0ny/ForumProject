@@ -1,4 +1,4 @@
-<main id="editor-content" class="p-8 flex flex-col gap-8 max-sm:items-center">
+<main id="editor-content" class="p-8 flex flex-col gap-8 max-sm:items-center lg:w-3/5 m-auto">
   <header class="font-primary font-light text-2xl">Post A New Question</header>
   <app-editor-writer (sendMarkedString)="onSendMarkedString($event)" class="bg-secondary rounded"></app-editor-writer>
   <div [innerHTML]="markedString | markdownPipe" class="bg-secondary p-4 w-full h-full"></div>
