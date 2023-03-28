@@ -9,35 +9,32 @@ import { UserInterface } from '../../interfaces/user-interface';
 export class AuthService {
   baseUrl = 'http://127.0.0.1:8000';
   isAuthenticated$ = this.isAuthenticated();
-  private activeUser$ = this.getUser()
+  private activeUser$ = this.getUser();
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
-  isAuthenticated() : Observable<boolean>{
-    return this.http.get<boolean>(this.baseUrl + '/api/user/authenticated')
+  isAuthenticated(): Observable<boolean> {
+    return this.http.get<boolean>(this.baseUrl + '/api/user/authenticated');
   }
 
   get authenticatedOf(): Observable<boolean> {
-    return this.isAuthenticated$
+    return this.isAuthenticated$;
   }
 
-  get activeUserOf() : Observable<UserInterface>{
-    return this.activeUser$
+  get activeUserOf(): Observable<UserInterface> {
+    return this.activeUser$;
   }
 
   login(email: string, password: string): Observable<any> {
-    return this.http
-      .get(this.baseUrl + '/sanctum/csrf-cookie')
-      .pipe(
-        switchMap(() =>
-          this.http.post(this.baseUrl + '/login', {
-            email,
-            password,
-            remember: true,
-          })
-        )
-      );
+    return this.http.get(this.baseUrl + '/sanctum/csrf-cookie').pipe(
+      switchMap(() =>
+        this.http.post(this.baseUrl + '/login', {
+          email,
+          password,
+          remember: true,
+        })
+      )
+    );
   }
 
   register(
@@ -46,26 +43,24 @@ export class AuthService {
     password: string,
     password_confirmation: string
   ) {
-    return this.http
-      .get(this.baseUrl + '/sanctum/csrf-cookie')
-      .pipe(
-        switchMap(() =>
-          this.http.post(this.baseUrl + '/register', {
-            name,
-            email,
-            password,
-            password_confirmation,
-          })
-        )
-      );
+    return this.http.get(this.baseUrl + '/sanctum/csrf-cookie').pipe(
+      switchMap(() =>
+        this.http.post(this.baseUrl + '/register', {
+          name,
+          email,
+          password,
+          password_confirmation,
+        })
+      )
+    );
   }
 
-  logout(){
-    return this.http.get(this.baseUrl + '/api/logout')
+  logout() {
+    return this.http.get(this.baseUrl + '/api/logout');
   }
 
   getUser(): Observable<UserInterface> {
-    return this.http.get<UserInterface>(this.baseUrl + '/api/user')
+    return this.http.get<UserInterface>(this.baseUrl + '/api/user');
   }
 
   getUserById(user_id: number): Observable<UserInterface> {
@@ -79,5 +74,4 @@ export class AuthService {
   index(): Observable<UserInterface[]> {
     return this.http.get<UserInterface[]>(this.baseUrl + '/api/users');
   }
-
 }

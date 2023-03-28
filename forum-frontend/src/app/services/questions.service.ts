@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {
-  BehaviorSubject,
+  BehaviorSubject, catchError,
   map,
-  Observable,
+  Observable, of,
   Subject,
   switchMap,
   tap,
@@ -34,7 +34,12 @@ export class QuestionsService {
   getQuestions(page = '', category = this.categorySubject.getValue()): void {
     let url = category ? `${this.baseUrl}/category/${category}` : this.baseUrl;
     const params = new HttpParams().set('cursor', page);
-    this.http.get<ApiResponseInterface>(url, { params })
+    this.http.get<ApiResponseInterface>(url, { params }).pipe(
+      catchError((error) => {
+        console.log('Error caucht',error)
+        return of<ApiResponseInterface>({data: [], next_cursor: "", prev_cursor: ""})
+      })
+    )
       .subscribe((res) => {
       this.apiBehavior$.next(res);
     });
@@ -42,7 +47,13 @@ export class QuestionsService {
 
   searchQuestions(partial : string, page : string = ''){
     const params = new HttpParams().set('cursor', page);
-    this.http.get<ApiResponseInterface>(`${this.baseUrl}/search/${partial}`, { params }).subscribe((res) => {
+    this.http.get<ApiResponseInterface>(`${this.baseUrl}/search/${partial}`, { params }).pipe(
+      catchError((error) => {
+        console.log('Error caucht',error)
+        return of<ApiResponseInterface>({data: [], next_cursor: "", prev_cursor: ""})
+      })
+    )
+      .subscribe((res) => {
       this.apiBehavior$.next(res);
     });
   }
@@ -92,6 +103,11 @@ export class QuestionsService {
   }
 
   getByUserId(userId : number) : Observable<QuestionsInterface[]>{
-    return this.http.get<QuestionsInterface[]>(`${this.baseUrl}/user/${userId}`)
+    return this.http.get<QuestionsInterface[]>(`${this.baseUrl}/user/${userId}`).pipe(
+      catchError((error) => {
+        console.log('Error caucht',error)
+        return of<QuestionsInterface[]>([])
+      })
+    )
   }
 }

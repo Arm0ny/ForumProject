@@ -12,13 +12,13 @@ import {LogoutComponent} from "./components/auth/logout/logout.component";
 import {UserDetailsComponent} from "./components/core/user-details/user-details.component";
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
-  {path: 'register', component: RegisterComponent,},
+  { path: 'register', component: RegisterComponent, canActivate: [LoggedInGuard] },
   { path: '', component: HomeComponent },
   { path: 'questions/:id', component: QuestionDetailsComponent },
-  {path: 'editor', component: EditorDetailsComponent, canActivate: [AuthGuard]},
+  { path: 'editor', component: EditorDetailsComponent, canActivate: [AuthGuard] },
   { path: 'create-profile', component: CreateProfileComponent },
-  {path: 'logout', component: LogoutComponent, canActivate: [AuthGuard]},
-  {path: 'profile', component: UserDetailsComponent, canActivate: [AuthGuard]}
+  { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: UserDetailsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

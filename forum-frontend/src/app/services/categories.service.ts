@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {catchError, Observable, of} from "rxjs";
 import {CategoriesInterface} from "../interfaces/categories-interface";
 
 @Injectable({
@@ -18,6 +18,11 @@ export class CategoriesService {
 
   index():
     Observable<CategoriesInterface[]>{
-    return this.http.get<CategoriesInterface[]>(this.baseUrl)
+    return this.http.get<CategoriesInterface[]>(this.baseUrl).pipe(
+      catchError((error) => {
+        console.log('there was an error while fetching categories, please try again')
+        return of<CategoriesInterface[]>([])
+      })
+    )
   }
 }

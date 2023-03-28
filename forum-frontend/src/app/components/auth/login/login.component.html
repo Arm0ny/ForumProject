@@ -1,4 +1,5 @@
 <main class="px-6 w-full h-screen flex flex-col items-center justify-center lg:w-1/2 m-auto">
+  <app-error-message *ngIf="error" [key]="error"></app-error-message>
   <div class="container flex flex-col bg-secondary gap-6 p-6 rounded">
     <header class="text-center">Login</header>
     <form

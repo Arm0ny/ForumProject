@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "./auth/auth.service";
-import {Observable, ReplaySubject, switchMap} from "rxjs";
+import {catchError, Observable, of, ReplaySubject, switchMap} from "rxjs";
 import {AnswersInterface} from "../interfaces/answers-interface";
 import {QuestionsInterface} from "../interfaces/questionsInterface";
 
@@ -26,14 +26,21 @@ export class AnswersService {
     );
   }
 
-  getByQuestionId(question_id: string) {
+  getByQuestionId(question_id: string) : Observable<AnswersInterface[]> {
     return this.http.get<AnswersInterface[]>(
       this.baseUrl + `/question/${question_id}`
-    );
+    ).pipe(catchError((error) => {
+      console.log('there was an error while fetching answers, please try again')
+      return of<AnswersInterface[]>([])
+      }));
   }
 
   getByUserId(user_id: number): Observable<AnswersInterface[]> {
-    return this.http.get<AnswersInterface[]>(this.baseUrl + `/user/${user_id}`);
+    return this.http.get<AnswersInterface[]>(this.baseUrl + `/user/${user_id}`).pipe(
+      catchError((error) => {
+        console.log('there was an error while fetching answers, please try again')
+        return of<AnswersInterface[]>([])
+    }));
   }
 }
 

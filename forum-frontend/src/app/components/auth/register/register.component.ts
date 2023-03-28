@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {catchError, throwError} from "rxjs";
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
+  error?: string;
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -38,21 +40,20 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    let name = this.registerForm.get('name')?.getRawValue();
-    let email = this.registerForm.get('email')?.getRawValue();
-    let password = this.registerForm.get('password')?.getRawValue();
-    let password_confirmation = this.registerForm
-      .get('password_confirmation')
-      ?.getRawValue();
+    let {name, email, password, password_confirmation} = this.registerForm.getRawValue()
     this.authService
-      .register(name, email, password, password_confirmation)
+      .register(name, email, password, password_confirmation).pipe(
+        catchError((error) => {
+          return throwError(() => {
+            this.error = error.message
+            return error;
+          });
+        })
+    )
       .subscribe(
         (res) => {
           this.router.navigate(['create-profile']);
         },
-        (err) => {
-          console.error(err);
-        }
       );
   }
 }
