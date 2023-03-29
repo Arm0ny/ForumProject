@@ -42,6 +42,15 @@ export class AnswersService {
         return of<AnswersInterface[]>([])
     }));
   }
+
+  edit(answer_id : string, content : string){
+    return this.http.put(`${this.baseUrl}/${answer_id}`, { id: answer_id, content });
+  }
+
+  delete(answer : AnswersInterface){
+    return this.http.delete(`${this.baseUrl}/${answer.id}`);
+
+  }
 }
 
 

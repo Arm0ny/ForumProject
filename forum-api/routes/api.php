@@ -48,10 +48,14 @@ Route::prefix('questions')->group(function () {
 
 Route::resource('categories', CategoryController::class);
 
-Route::resource('answer', AnswerController::class);
 Route::prefix('answer')->group(function () {
     Route::get('/user/{userId}', [AnswerController::class, 'getByUserId']);
     Route::get('/question/{questionId}', [AnswerController::class, 'getByQuestionId']);
+    Route::middleware('auth:sanctum')->post('', [AnswerController::class, 'store']);
+    Route::middleware('auth:sanctum')->put('/{answerId}', [AnswerController::class, 'update']);
+    Route::middleware('auth:sanctum')->delete('/{answerId}', [AnswerController::class, 'destroy']);
+
+
 });
 
 

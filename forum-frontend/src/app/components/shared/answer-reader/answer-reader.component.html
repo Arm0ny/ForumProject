@@ -5,6 +5,12 @@
       [alt]="answer.name"
     />
     <h1 class="font-primary font-light">{{ answer.name }}</h1>
+    <span *ngIf="activeUser && activeUser.id === answer.user_id" class="flex gap-2"><button (click)="showEditor()">Edit</button> <button>Delete</button></span>
   </header>
-  <div [innerHTML]="answer.content | markdownPipe" class=" font-primary font-normal"></div>
+
+  <div *ngIf="!editMode else editBlock" [innerHTML]="answer.content | markdownPipe" class=" font-primary font-normal"></div>
+  <ng-template #editBlock>
+    <app-answer-writer [action]="'edit'"></app-answer-writer>
+  </ng-template>
 </article>
+

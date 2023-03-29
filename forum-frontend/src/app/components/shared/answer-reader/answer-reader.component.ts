@@ -11,8 +11,15 @@ import {AuthService} from "../../../services/auth/auth.service";
 export class AnswerReaderComponent implements OnInit {
   constructor(private authService : AuthService) { }
   @Input() answer! : AnswersInterface
+  @Input() activeUser! : UserInterface | null
+  editMode = false;
+
 
   ngOnInit() {
 
+  }
+
+  showEditor(){
+    this.editMode = !this.editMode
   }
 }

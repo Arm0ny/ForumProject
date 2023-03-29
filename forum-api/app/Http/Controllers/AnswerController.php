@@ -51,10 +51,13 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $answerId)
     {
-        $answer = Answer::find($id);
-        return response(answer::update($request->all()));
+        $answer =  Answer::find($answerId);
+        if($request->user()->id != $answer->user_id){
+            abort(401, "You are not the Owner of this Answer");
+        }
+        return response($answer->update($request->all()));
     }
 
     /**
@@ -63,10 +66,15 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $answerId)
     {
-        return response(Answer::destroy($id));
-    }
+        $answer = Question::findOrFail($answerId);
+        if ($request->user()->id != $answer->user_id) {
+            abort(401, "You are not the Owner of this Answer");
+        }
+
+        return $answer->delete();
+            }
 
     public function getByUserId($userId){
         return User::find($userId)->answers;
