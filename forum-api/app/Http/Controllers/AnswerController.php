@@ -68,7 +68,7 @@ class AnswerController extends Controller
      */
     public function destroy(Request $request, $answerId)
     {
-        $answer = Question::findOrFail($answerId);
+        $answer = Answer::findOrFail($answerId);
         if ($request->user()->id != $answer->user_id) {
             abort(401, "You are not the Owner of this Answer");
         }

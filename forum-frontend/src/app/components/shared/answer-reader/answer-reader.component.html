@@ -5,7 +5,10 @@
       [alt]="answer.name"
     />
     <h1 class="font-primary font-light">{{ answer.name }}</h1>
-    <span *ngIf="activeUser && activeUser.id === answer.user_id" class="flex gap-2"><button (click)="showEditor()">Edit</button> <button>Delete</button></span>
+    <span *ngIf="activeUser && activeUser.id === answer.user_id" class="flex gap-2">
+      <button (click)="showEditor()">Edit</button>
+      <button (click)="onDelete()">Delete</button>
+    </span>
   </header>
 
   <div *ngIf="!editMode else editBlock" [innerHTML]="answer.content | markdownPipe" class=" font-primary font-normal"></div>

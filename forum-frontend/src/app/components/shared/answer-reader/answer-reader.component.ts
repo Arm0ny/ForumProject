@@ -1,25 +1,40 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {AnswersInterface} from "../../../interfaces/answers-interface";
 import {UserInterface} from "../../../interfaces/user-interface";
 import {AuthService} from "../../../services/auth/auth.service";
+import {AnswersService} from "../../../services/answers.service";
+import {catchError, Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-answer-reader',
   templateUrl: './answer-reader.component.html',
-  styleUrls: ['./answer-reader.component.sass']
+  styleUrls: ['./answer-reader.component.sass'],
 })
-export class AnswerReaderComponent implements OnInit {
-  constructor(private authService : AuthService) { }
-  @Input() answer! : AnswersInterface
-  @Input() activeUser! : UserInterface | null
+export class AnswerReaderComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  constructor(
+    private authService: AuthService,
+    private answersService: AnswersService
+  ) {}
+  @Input() answer!: AnswersInterface;
+  @Input() activeUser!: UserInterface | null;
   editMode = false;
-
 
   ngOnInit() {
 
   }
 
-  showEditor(){
-    this.editMode = !this.editMode
+  showEditor() {
+    this.editMode = !this.editMode;
+  }
+
+  onDelete() {
+    this.answersService.delete(this.answer).pipe(
+      takeUntil(this.destroy$))
+      .subscribe();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next()
   }
 }
