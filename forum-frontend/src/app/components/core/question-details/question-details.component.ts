@@ -3,17 +3,19 @@ import { QuestionsService } from '../../../services/questions.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { AnswersService } from '../../../services/answers.service';
 import { AuthService } from '../../../services/auth/auth.service';
-import {catchError, filter, map, Observable, Subject, switchMap, takeUntil, tap, throwError} from "rxjs";
+import {catchError, filter, map, Observable, of, Subject, switchMap, takeUntil, tap, throwError} from "rxjs";
+import {QuestionsInterface} from "../../../interfaces/questionsInterface";
+import {AnswerWriterComponent} from "../answer-writer/answer-writer.component";
 
 @Component({
   selector: 'app-question-details',
   templateUrl: './question-details.component.html',
   styleUrls: ['./question-details.component.sass'],
 })
-export class QuestionDetailsComponent implements OnDestroy {
+export class QuestionDetailsComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   editMode: boolean = false;
-  deleteAlert = false
+  deleteAlert = false;
 
   constructor(
     private questionService: QuestionsService,
@@ -24,24 +26,21 @@ export class QuestionDetailsComponent implements OnDestroy {
   ) {}
   readonly activeUser$ = this.authService.activeUserOf;
 
+  questionId$ = this.route.snapshot.paramMap.get('id')
 
-  questionId$ = this.route.paramMap.pipe(
-    map((paramMap) => paramMap.get('id')),
-    filter(Boolean)
-  );
+  question$ = this.questionService.activeQuestionOf()
+  answers$ = this.answersService.answersOf()
 
-  question$ = this.questionId$.pipe(
-    switchMap((questionId$) =>
-      this.questionService.getActiveQuestion(questionId$)
-    )
-  );
 
-  answers$ = this.questionId$.pipe(
-    switchMap((questionId) => this.answersService.getByQuestionId(questionId))
-  );
+  ngOnInit() {
+    if(this.questionId$){
+      this.questionService.setActiveQuestion(this.questionId$)
+      this.answersService.getByQuestionId(this.questionId$)
+    }
+  }
 
   onEdit() {
-    this.editMode = true
+    this.editMode = true;
   }
 
   onDelete(deleteId: number) {
@@ -55,14 +54,14 @@ export class QuestionDetailsComponent implements OnDestroy {
         })
       )
       .subscribe((res) => this.router.navigate(['']));
-    this.showAlert()
+    this.showAlert();
   }
 
-  showAlert(){
-    this.deleteAlert = !this.deleteAlert
+  showAlert() {
+    this.deleteAlert = !this.deleteAlert;
   }
 
   ngOnDestroy() {
-    this.destroy$.next()
+    this.destroy$.next();
   }
 }

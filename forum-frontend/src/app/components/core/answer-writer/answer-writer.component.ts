@@ -48,11 +48,11 @@ export class AnswerWriterComponent implements OnInit, OnDestroy {
     this.destroy$.next()
   }
 
-  onStore(answer_id : string, content : string){
+  onStore(question_id : string, content : string){
     this.answerService
-      .store(answer_id, content).pipe(
+      .store(question_id, content).pipe(
       takeUntil(this.destroy$))
-      .subscribe();
+      .subscribe(res => this.answerService.getByQuestionId(question_id));
   }
 
   onEdit(answer_id : string, content : string){

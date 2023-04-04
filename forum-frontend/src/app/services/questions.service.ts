@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import {
   BehaviorSubject, catchError,
   map,
-  Observable, of,
+  Observable, of, ReplaySubject,
   Subject,
   switchMap,
   tap,
@@ -24,11 +24,16 @@ export class QuestionsService {
     prev_cursor: '',
   });
   private categorySubject = new BehaviorSubject<number | null>(null);
+  private activeQuestion$ = new ReplaySubject<QuestionsInterface>(1)
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   apiResponseOf(): Observable<ApiResponseInterface> {
     return this.apiBehavior$;
+  }
+
+  activeQuestionOf() : Observable<QuestionsInterface> {
+    return this.activeQuestion$;
   }
 
   getQuestions(page = '', category = this.categorySubject.getValue()): void {
@@ -72,8 +77,10 @@ export class QuestionsService {
     );
   }
 
-  getActiveQuestion(questionId: string): Observable<QuestionsInterface> {
-    return this.http.get<QuestionsInterface>(`${this.baseUrl}/${questionId}`);
+  setActiveQuestion(questionId: string) {
+    this.http.get<QuestionsInterface>(`${this.baseUrl}/${questionId}`).subscribe(
+      res => this.activeQuestion$.next(res)
+    );
   }
 
   setCategory(categoryId: number | null) {

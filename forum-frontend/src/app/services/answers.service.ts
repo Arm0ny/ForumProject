@@ -14,6 +14,10 @@ export class AnswersService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  answersOf() : Observable<AnswersInterface[]>{
+    return this.answersSubject$
+  }
+
   store(question_id: string, content: string): Observable<AnswersInterface> {
     return this.authService.getUser().pipe(
       switchMap((user) => {
@@ -26,13 +30,13 @@ export class AnswersService {
     );
   }
 
-  getByQuestionId(question_id: string) : Observable<AnswersInterface[]> {
-    return this.http.get<AnswersInterface[]>(
+  getByQuestionId(question_id: string) : void {
+    this.http.get<AnswersInterface[]>(
       this.baseUrl + `/question/${question_id}`
     ).pipe(catchError((error) => {
       console.log('there was an error while fetching answers, please try again')
       return of<AnswersInterface[]>([])
-      }));
+      })).subscribe(res => this.answersSubject$.next(res));
   }
 
   getByUserId(user_id: number): Observable<AnswersInterface[]> {
