@@ -15,7 +15,7 @@
       </ng-container>
 
       <ng-template #editor>
-        <app-editor-writer [action]="'edit'" [question]="question"></app-editor-writer>
+        <app-editor-writer (closeEditor)="onEdit()" [action]="'edit'" [question]="question"></app-editor-writer>
       </ng-template>
     </article>
 

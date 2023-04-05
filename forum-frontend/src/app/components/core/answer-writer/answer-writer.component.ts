@@ -36,7 +36,7 @@ export class AnswerWriterComponent implements OnInit, OnDestroy {
     let question_id = this.questionId!;
     let content = this.answerForm.get('content')?.getRawValue();
     return this.action === 'store' ? this.onStore(question_id, content)
-                                   : this.onEdit(question_id, content)
+                                   : this.onEdit(content)
 
   }
 
@@ -55,11 +55,13 @@ export class AnswerWriterComponent implements OnInit, OnDestroy {
       .subscribe(res => this.answerService.getByQuestionId(question_id));
   }
 
-  onEdit(answer_id : string, content : string){
-    this.answerService
-      .edit(answer_id, content).pipe(
-      takeUntil(this.destroy$))
-      .subscribe();
+  onEdit(content : string){
+    if(this.answer) {
+      this.answerService
+        .edit(this.answer.id, content).pipe(
+        takeUntil(this.destroy$))
+        .subscribe(res => this.answer ? this.answerService.getByQuestionId(this.answer.question_id) : '');
+    }
   }
 }
 

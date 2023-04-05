@@ -13,7 +13,7 @@
 
   <div *ngIf="!editMode else editBlock" [innerHTML]="answer.content | markdownPipe" class=" font-primary font-normal"></div>
   <ng-template #editBlock>
-    <app-answer-writer [action]="'edit'"></app-answer-writer>
+    <app-answer-writer [action]="'edit'" [answer]="answer"></app-answer-writer>
   </ng-template>
 </article>
 

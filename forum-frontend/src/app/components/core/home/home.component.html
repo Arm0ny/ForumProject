@@ -10,8 +10,8 @@
     <app-category-selector class="flex justify-center align-items-center mt-6 md:hidden">
     </app-category-selector>
 
-    <span *ngIf="activeUser$ | async as activeUser else logInBlock" class="flex gap-2 justify-center items-center">
-      <p>Logged in as {{activeUser.name}}</p>
+    <span *ngIf="activeUser$ | async as activeUser else logInBlock" routerLink="/profile" class="active-user flex gap-2 justify-center items-center font-primary bg bg-secondary p-4 hover:cursor-pointer hover:bg-secondary-hover transition duration-300">
+      <p>Logged in as <strong>{{activeUser.name}}</strong></p>
       <img [src]="'/profile-images/' + activeUser.profile_image | getDownloadURL" alt="profile-image" class="h-8 w-8"/>
     </span>
     <ng-template #logInBlock><a routerLink="/login">Log In!</a></ng-template>
@@ -19,12 +19,11 @@
     <header class="font-primary text-bold text-lg text-center"><h1>{{apiResponse.data.length}} Posts</h1></header>
 
     <app-question *ngFor="let question of apiResponse.data" [question]="question"
-      class="bg-secondary flex p-4 rounded max-h-1/4">
-
+      class="bg-secondary flex p-4 rounded max-h-1/4 cursor-pointer hover:bg-secondary-hover transition duration-300">
     </app-question>
     <span class="flex w-full items-center justify-center gap-6">
-      <button (click)="changePage('prev')" [disabled]="hasPage(apiResponse.prev_cursor)" class="p-4 bg-[#DAE0FF] rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="previous" class="h-4 w-4 rotate-180" /></button>
-      <button (click)="changePage('next')" [disabled]="hasPage(apiResponse.next_cursor)" class="p-4 bg-[#DAE0FF] rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="next" class="h-4 w-4" /></button>
+      <button (click)="changePage('prev')" [disabled]="hasPage(apiResponse.prev_cursor)" class="p-4 bg-[#DAE0FF] disabled:bg-none rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="previous" class="h-4 w-4 rotate-180" /></button>
+      <button (click)="changePage('next')" [disabled]="hasPage(apiResponse.next_cursor)" class="p-4 bg-[#DAE0FF] disabled:bg-none rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="next" class="h-4 w-4" /></button>
     </span>
     <a routerLink="/editor" class=" lg:hidden fixed bottom-10 right-6 p-2 w-20 h-20 rounded-full bg-[#4361EE]">
       <img [src]="'/icons/plus-button.svg' | getDownloadURL" alt="Ask Question"/>
@@ -33,7 +32,7 @@
 
   <section class="hidden lg:block lg:w-1/5 flex flex-col justify-center">
     <header *ngIf="activeUser$ | async" class="flex justify-between"><h1 class="font-secondary font-medium text-[#20BE63]">Online</h1> <a routerLink="/logout" class="font-secondary font-medium text-danger">Logout</a></header>
-    <a routerLink="/editor" class="flex justify-center text-center py-4 w-full bg-accent text-secondary font-secondary font-medium rounded mb-16">+ Create new Question</a>
+    <a routerLink="/editor" class="flex justify-center text-center py-4 w-full bg-accent text-secondary font-secondary font-medium rounded mb-16 hover:bg-accent-hover">+ Create new Question</a>
     <app-users-ranking></app-users-ranking>
   </section>
 </main>

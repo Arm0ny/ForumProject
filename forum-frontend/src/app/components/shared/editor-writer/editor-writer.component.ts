@@ -14,6 +14,7 @@ import {QuestionsInterface} from "../../../interfaces/questionsInterface";
 })
 export class EditorWriterComponent implements OnDestroy {
   private destroy$ = new Subject<void>();
+  @Output() closeEditor = new EventEmitter<boolean>()
   constructor(
     private categoriesService: CategoriesService,
     private questionsService: QuestionsService,
@@ -74,7 +75,10 @@ export class EditorWriterComponent implements OnDestroy {
     this.questionsService
       .edit(this.question)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res) => this.router.navigate([`questions`, this.question.id]));
+      .subscribe((res) => {
+        this.questionsService.setActiveQuestion(this.question.id);
+        this.closeEditor.emit(false)
+      });
   }
 
   ngOnDestroy() {

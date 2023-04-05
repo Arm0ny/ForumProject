@@ -31,7 +31,7 @@ export class AnswerReaderComponent implements OnInit, OnDestroy {
   onDelete() {
     this.answersService.delete(this.answer).pipe(
       takeUntil(this.destroy$))
-      .subscribe();
+      .subscribe(res => this.answersService.getByQuestionId(this.answer.question_id.toString()));
   }
 
   ngOnDestroy() {

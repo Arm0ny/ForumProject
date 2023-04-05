@@ -40,7 +40,7 @@ export class QuestionDetailsComponent implements OnInit, OnDestroy {
   }
 
   onEdit() {
-    this.editMode = true;
+    this.editMode = !this.editMode;
   }
 
   onDelete(deleteId: number) {

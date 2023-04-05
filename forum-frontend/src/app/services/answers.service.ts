@@ -30,7 +30,7 @@ export class AnswersService {
     );
   }
 
-  getByQuestionId(question_id: string) : void {
+  getByQuestionId(question_id: string | number) : void {
     this.http.get<AnswersInterface[]>(
       this.baseUrl + `/question/${question_id}`
     ).pipe(catchError((error) => {
@@ -47,7 +47,7 @@ export class AnswersService {
     }));
   }
 
-  edit(answer_id : string, content : string){
+  edit(answer_id : string | number, content : string){
     return this.http.put(`${this.baseUrl}/${answer_id}`, { id: answer_id, content });
   }
 

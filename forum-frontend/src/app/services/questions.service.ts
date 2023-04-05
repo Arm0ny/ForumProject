@@ -77,7 +77,7 @@ export class QuestionsService {
     );
   }
 
-  setActiveQuestion(questionId: string) {
+  setActiveQuestion(questionId: string | number) {
     this.http.get<QuestionsInterface>(`${this.baseUrl}/${questionId}`).subscribe(
       res => this.activeQuestion$.next(res)
     );
@@ -105,6 +105,7 @@ export class QuestionsService {
     return this.http.put<QuestionsInterface>(`${this.baseUrl}/${question.id}`, {
       id: question.id,
       title: question.title,
+      category_id : question.category_id,
       content: question.content
     });
   }
