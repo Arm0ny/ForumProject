@@ -38,6 +38,7 @@ import { UsersRankingComponent } from './components/shared/users-ranking/users-r
 import { LogoutComponent } from './components/auth/logout/logout.component';
 import { SearchbarComponent } from './components/shared/searchbar/searchbar.component';
 import { UserDetailsComponent } from './components/core/user-details/user-details.component';
+import {MatIconModule} from "@angular/material/icon";
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +74,7 @@ import { UserDetailsComponent } from './components/core/user-details/user-detail
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
+    MatIconModule,
   ],
   providers: [
     {
