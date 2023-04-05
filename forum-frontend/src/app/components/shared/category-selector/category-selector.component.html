@@ -4,12 +4,12 @@
     *ngIf="categories"
     class="flex gap-8 w-2/3 bg-secondary p-2 rounded justify-between md:flex-col md:gap-6 md:bg-none font-primary font-medium text-font md:list-disc"
   >
-    <li *ngFor="let category of categories" class="md:px-8 md:py-6 rounded-xl  focus:bg-secondary ">
-      <button (click)="setCategorySubject(category.id)">{{ category.name }}</button>
+    <li *ngFor="let category of categories">
+      <button [ngClass]="category.id === activeCategory ? 'bg-secondary' : 'bg-none'" (click)="setCategorySubject(category.id)" class="md:px-8 md:py-4 rounded-lg md:w-full md:text-left">{{ category.name }}</button>
     </li>
 
-    <li class="md:px-8 md:py-6 rounded-xl  focus:bg-secondary ">
-      <button (click)="setCategorySubject(null)">All</button>
+    <li>
+      <button (click)="setCategorySubject(null)" [ngClass]="!activeCategory ? 'bg-secondary' : 'bg-none'" class="md:px-8 md:py-4 rounded-lg md:w-full md:text-left">All</button>
     </li>
   </ul>
 </div>

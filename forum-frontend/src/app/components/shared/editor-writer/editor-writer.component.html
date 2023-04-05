@@ -6,5 +6,5 @@
     <input type="text" formControlName="title" placeholder="title here" class="bg-accent-light p-2 rounded shadow-inner w-full"/>
   </fieldset>
   <textarea formControlName="content" (input)="onInput($event)" placeholder="content here" class="w-full bg-accent-light rounded shadow-inner p-2"></textarea>
-  <button type="submit" [disabled]="!writerForm.valid" class="p-4 bg-accent rounded text-secondary">Submit</button>
+  <button type="submit" [disabled]="!writerForm.valid" class="p-4 bg-accent rounded text-secondary disabled:text-black disabled:bg-accent-light transition duration-300">Submit</button>
 </form>

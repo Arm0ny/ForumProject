@@ -15,6 +15,7 @@ export class CategorySelectorComponent implements OnInit {
   ) {}
 
   categories?: CategoriesInterface[];
+  activeCategory? : number | null
 
   //Event for sending category to parent component
   @Output() setCategoryEvent = new EventEmitter<number | null>();
@@ -32,5 +33,6 @@ export class CategorySelectorComponent implements OnInit {
   setCategorySubject(categoryId: number | null) {
     this.questionsService.setCursor('');
     this.questionsService.setCategory(categoryId);
+    this.activeCategory = categoryId
   }
 }
