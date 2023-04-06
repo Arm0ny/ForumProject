@@ -25,7 +25,6 @@ export class EditorWriterComponent implements OnDestroy {
   categories$ = this.categoriesService.categoriesOf();
   @Input() action: string = 'store';
   @Input() question: QuestionsInterface = {
-    category_id: 0,
     content: '',
     id: 0,
     points: 0,
@@ -41,7 +40,7 @@ export class EditorWriterComponent implements OnDestroy {
   ngOnInit() {
     this.writerForm.setValue({
       title: this.question.title,
-      category: this.question.category_id,
+      category: this.question.category!.id,
       content: this.question.content,
     });
   }
@@ -56,7 +55,7 @@ export class EditorWriterComponent implements OnDestroy {
     }
     this.question.title = this.writerForm.get('title')?.getRawValue();
     this.question.content = this.writerForm.get('content')?.getRawValue();
-    this.question.category_id = this.writerForm.get('category')?.getRawValue();
+    this.question.category!.id = this.writerForm.get('category')?.getRawValue();
     return this.action === 'store' ? this.onStore() : this.onEdit();
   }
 
@@ -65,7 +64,7 @@ export class EditorWriterComponent implements OnDestroy {
       .store(
         this.question.title,
         this.question.content,
-        this.question.category_id
+        this.question.category!.id
       )
       .pipe(takeUntil(this.destroy$))
       .subscribe((res) => this.router.navigate([`questions`, res.id]));

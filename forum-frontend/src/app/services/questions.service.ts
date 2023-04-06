@@ -105,7 +105,7 @@ export class QuestionsService {
     return this.http.put<QuestionsInterface>(`${this.baseUrl}/${question.id}`, {
       id: question.id,
       title: question.title,
-      category_id : question.category_id,
+      category_id : question.category!.id,
       content: question.content
     });
   }
