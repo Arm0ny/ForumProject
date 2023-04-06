@@ -5,7 +5,7 @@
       <header class="flex gap-4">
         <h1 class="text-2xl">{{question.title}}</h1>
         <span *ngIf="activeUser$ | async as activeUser" class="flex gap-2">
-            <ng-container *ngIf="activeUser.id === question.user_id">
+            <ng-container *ngIf="question.user && activeUser.id === question.user.id">
               <button (click)="onEdit()"><img src="assets/img/icons/edit_FILL1_wght400_GRAD0_opsz48.svg" class="h-8 w-8 " alt="edit" /></button>
               <button (click)="showAlert()"><img src="assets/img/icons/delete_FILL1_wght400_GRAD0_opsz48.svg" class="h-8 w-8" alt="delete"/></button>
             </ng-container>

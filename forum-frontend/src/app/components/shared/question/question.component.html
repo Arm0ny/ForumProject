@@ -1,7 +1,7 @@
 <article (click)="onClick()" *ngIf="question" class="flex flex-col gap-4 h-full w-full">
-  <header class="flex gap-4 items-center">
-    <img [src]="'/profile-images/' + question.profile_image | getDownloadURL" class="w-8 h-8 rounded-full" alt="{{question.name}}"/>
-    <h2 class="font-light">Posted By: {{question.name}}</h2>
+  <header *ngIf="question.user" class="flex gap-4 items-center">
+    <img [src]="'/profile-images/' + question.user.profile_image | getDownloadURL" class="w-8 h-8 rounded-full" alt="{{question.user.name}}"/>
+    <h2 class="font-light">Posted By: {{question.user.name}}</h2>
   </header>
 
   <div class="ml-2 flex flex-col gap-2">

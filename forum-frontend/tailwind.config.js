@@ -13,7 +13,7 @@ module.exports = {
         textColor: "#1d1d1d",
         'accent-light' : '#F4F6FF',
         'secondary-hover': "#f3f3f3",
-        'accent-hover': "#3D5AF1",
+        'accent-hover': "#364fd0",
       },
 
       fontFamily: {

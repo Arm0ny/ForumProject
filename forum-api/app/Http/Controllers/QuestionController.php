@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -16,10 +17,7 @@ class QuestionController extends Controller
     public function index()
     {
         return Question::query()
-            ->select('questions.*' , 'users.profile_image', 'users.name')
-            ->join('users' , 'users.id' , 'questions.user_id')
-            ->orderBy('questions.id', 'desc')
-            ->cursorPaginate(10);
+            ->with('user')->cursorPaginate(10);
     }
 
 
@@ -38,11 +36,13 @@ class QuestionController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return response(Question::findOrFail($id));
+        return Question::query()
+            ->with('user')
+            ->find($id);
+
     }
 
 
@@ -90,20 +90,17 @@ class QuestionController extends Controller
     public function getByCategoryId($categoryId) {
 
         return Question::query()
-            ->select('questions.*' , 'users.profile_image', 'users.name')
-            ->join('users' , 'users.id' , 'questions.user_id')
-            ->where('category_id','=', $categoryId)
-            ->orderBy('questions.id', 'desc')
+            ->with(['user', 'category'])
+            ->where("category_id", "=", $categoryId)
             ->cursorPaginate(10);
+
     }
 
     public function getByTitle($partial){
 
         return Question::query()
-            ->select('questions.*' , 'users.profile_image', 'users.name')
-            ->join('users' , 'users.id' , 'questions.user_id')
+            ->with(['user', 'category'])
             ->where('questions.title','like', '%'.$partial.'%')
-            ->orderBy('questions.id', 'desc')
             ->cursorPaginate(10);
     }
 

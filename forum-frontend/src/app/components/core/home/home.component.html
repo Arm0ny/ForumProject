@@ -1,6 +1,6 @@
 <main
   *ngIf="apiResponse$ | async as  apiResponse"
-  class="p-6 lg:p-20 flex max-md:flex-col gap-6 align-items-center h-full md:justify-between  lg:gap-32 mx-auto"
+  class="p-6 lg:py-20 lg:px-12 flex max-md:flex-col gap-6 align-items-center h-full md:justify-between  lg:gap-12 mx-auto"
 >
   <section class="hidden md:block md:w-2/5 lg:1/5">
     <app-sidebar></app-sidebar>
@@ -10,13 +10,16 @@
     <app-category-selector class="flex justify-center align-items-center mt-6 md:hidden">
     </app-category-selector>
 
-    <span *ngIf="activeUser$ | async as activeUser else logInBlock" routerLink="/profile" class="active-user flex gap-2 justify-center items-center font-primary bg bg-secondary p-4 hover:cursor-pointer hover:bg-secondary-hover transition duration-300">
-      <p>Logged in as <strong>{{activeUser.name}}</strong></p>
-      <img [src]="'/profile-images/' + activeUser.profile_image | getDownloadURL" alt="profile-image" class="h-8 w-8"/>
-    </span>
-    <ng-template #logInBlock><a routerLink="/login">Log In!</a></ng-template>
+    <header *ngIf="activeUser$ | async as activeUser else logInBlock" class="flex justify-between">
+      <span routerLink="/profile" class="shadow flex gap-2 justify-center items-center font-primary bg bg-secondary rounded p-4 hover:cursor-pointer hover:bg-secondary-hover transition duration-300">
+        <p>Logged in as <strong>{{activeUser.name}}</strong></p>
+        <img [src]="'/profile-images/' + activeUser.profile_image | getDownloadURL" alt="profile-image" class="h-8 w-8"/>
+      </span>
+    <button class="shadow p-4 bg-secondary rounded hover:bg-secondary-hover transition duration-300"><img src="assets/img/icons/logout_black_24dp.svg" alt="Logout"/></button>
+    </header>
+      <ng-template #logInBlock><a routerLink="/login">Log In!</a></ng-template>
 
-    <header class="font-primary text-bold text-lg text-center"><h1>{{apiResponse.data.length}} Posts</h1></header>
+    <header class="font-primary text-bold text-lg text-center"><h1>{{apiResponse.questions_count}} Posts</h1></header>
 
     <app-question *ngFor="let question of apiResponse.data" [question]="question"
       class="bg-secondary flex p-4 rounded max-h-1/4 cursor-pointer hover:bg-secondary-hover transition duration-300">
@@ -32,7 +35,6 @@
 
   <section class="hidden lg:block lg:w-1/5 flex flex-col justify-center">
     <header *ngIf="activeUser$ | async" class="flex justify-end items-center mb-2">
-      <img routerLink="/logout" src="assets/img/icons/logout_black_24dp.svg" class="font-medium  hover:cursor-pointer"/>
     </header>
     <a routerLink="/editor" class="flex justify-center text-center py-4 w-full bg-accent text-secondary font-secondary font-medium rounded mb-16 hover:bg-accent-hover">+ Create new Question</a>
     <app-users-ranking></app-users-ranking>
