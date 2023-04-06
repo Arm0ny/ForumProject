@@ -15,7 +15,7 @@
         <p>Logged in as <strong>{{activeUser.name}}</strong></p>
         <img [src]="'/profile-images/' + activeUser.profile_image | getDownloadURL" alt="profile-image" class="h-8 w-8"/>
       </span>
-    <button class="shadow p-4 bg-secondary rounded hover:bg-secondary-hover transition duration-300"><img src="assets/img/icons/logout_black_24dp.svg" alt="Logout"/></button>
+    <button routerLink="/logout" class="shadow p-4 bg-secondary rounded hover:bg-secondary-hover transition duration-300"><img src="assets/img/icons/logout_black_24dp.svg" alt="Logout"/></button>
     </header>
       <ng-template #logInBlock><a routerLink="/login">Log In!</a></ng-template>
 

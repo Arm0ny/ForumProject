@@ -16,9 +16,7 @@ class AnswerController extends Controller
     public function index()
     {
         return Answer::query()
-            ->select('answers.*, user.name, user.profile_image')
-            ->join('users' , 'users.id' , 'answers.user_id')
-            ->orderBy('questions.id', 'desc')
+            ->with('user')
             ->get();
     }
 
@@ -82,10 +80,8 @@ class AnswerController extends Controller
 
     public function getByQuestionId($questionId){
         return Answer::query()
-            ->select('answers.*' , 'users.profile_image', 'users.name')
-            ->join('users' , 'users.id' , 'answers.user_id')
-            ->where('question_id','=', $questionId)
-            ->orderBy('answers.id', 'desc')
+            ->with(['user'])
+            ->where('question_id', '=', $questionId)
             ->get();
 
     }

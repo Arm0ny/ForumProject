@@ -1,11 +1,11 @@
 <article class="flex flex-col gap-4 bg-secondary rounded p-6 min-h-1/4">
-  <header class="flex items-center gap-4">
+  <header *ngIf="answer.user" class="flex items-center gap-4">
     <img
-      [src]="'/profile-images/' + answer.profile_image | getDownloadURL"
-      [alt]="answer.name"
+      [src]="'/profile-images/' + answer.user.profile_image | getDownloadURL"
+      [alt]="answer.user.name"
     />
-    <h1 class="font-primary font-light">{{ answer.name }}</h1>
-    <span *ngIf="activeUser && activeUser.id === answer.user_id" class="flex gap-2">
+    <h1 class="font-primary font-light">{{ answer.user.name }}</h1>
+    <span *ngIf="answer.user && activeUser && activeUser.id === answer.user.id" class="flex gap-2">
       <button (click)="showEditor()"><img src="assets/img/icons/edit_FILL1_wght400_GRAD0_opsz48.svg" class="h-8 w-8" alt="edit"/></button>
       <button (click)="onDelete()"><img src="assets/img/icons/delete_FILL1_wght400_GRAD0_opsz48.svg" class="h-8 w-8" alt="delete"/></button>
     </span>

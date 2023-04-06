@@ -1,10 +1,10 @@
+import {UserInterface} from "./user-interface";
+
 export interface AnswersInterface {
   id : number
-  user_id : number,
   question_id : number,
   content : string,
   isAnswer : boolean
+  user? : UserInterface;
 
-  name : string
-  profile_image: string
 }
