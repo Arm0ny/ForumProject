@@ -8,4 +8,7 @@ h1 {
 div {
   font-family: "Inter", sans-serif; }
 
+.shadow {
+  box-shadow: 0 76px 109px 0 rgba(0, 0, 0, 0.15); }
+
 /*# sourceMappingURL=question-details.component.css.map */

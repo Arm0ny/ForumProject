@@ -1,5 +1,9 @@
 <main *ngIf="question$ | async as question" class="flex flex-col p-8 gap-10 lg:w-1/2 lg:m-auto">
-  <section class="flex flex-col gap-10">
+  <section class="flex flex-col gap-10 font-primary">
+    <header *ngIf="question.user" class="shadow p-4 flex gap-2 justify-center items-center bg-secondary rounded">
+      <h1>Posted By: {{question.user.name}}</h1>
+      <img [src]="'/profile-images/' + question.user.profile_image | getDownloadURL" alt=""/>
+    </header>
     <article *ngIf="question" class="flex flex-col bg-secondary rounded p-6 gap-6">
       <ng-container *ngIf="!editMode else editor">
       <header class="flex gap-4">
