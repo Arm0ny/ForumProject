@@ -19,7 +19,7 @@
     </header>
       <ng-template #logInBlock><a routerLink="/login">Log In!</a></ng-template>
 
-    <header class="font-primary text-bold text-lg text-center"><h1>{{apiResponse.questions_count}} Posts</h1></header>
+    <header class="font-primary text-bold text-lg text-center"><h1>{{apiResponse.count}} Posts</h1></header>
 
     <app-question *ngFor="let question of apiResponse.data" [question]="question"
       class="bg-secondary flex p-4 rounded max-h-1/4 cursor-pointer hover:bg-secondary-hover transition duration-300">

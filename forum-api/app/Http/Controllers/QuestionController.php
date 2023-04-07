@@ -12,12 +12,18 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Pagination\CursorPaginator
+     * @return
      */
     public function index()
     {
-        return Question::query()
+        $data = Question::query()
             ->with('user')->cursorPaginate(10);
+
+        $count = Question::query()
+            ->count();
+
+        $collection = collect(['count' => $count]);
+        return response($collection->merge($data));
     }
 
 
@@ -89,19 +95,33 @@ class QuestionController extends Controller
 
     public function getByCategoryId($categoryId) {
 
-        return Question::query()
+        $data = Question::query()
             ->with(['user', 'category'])
             ->where("category_id", "=", $categoryId)
             ->cursorPaginate(10);
+
+        $count = Question::query()
+            ->where("category_id", "=", $categoryId)
+            ->count();
+
+        $collection = collect(['count' => $count]);
+        return response($collection->merge($data));
 
     }
 
     public function getByTitle($partial){
 
-        return Question::query()
+        $data =  Question::query()
             ->with(['user', 'category'])
             ->where('questions.title','like', '%'.$partial.'%')
             ->cursorPaginate(10);
+
+        $count = Question::query()
+            ->where('questions.title','like', '%'.$partial.'%')
+            ->count();
+
+        $collection = collect(['count' => $count]);
+        return response($collection->merge($data));
     }
 
     public function destroy(Request $request, $questionId){
