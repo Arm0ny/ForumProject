@@ -5,7 +5,7 @@ import { AnswersService } from '../../../services/answers.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import {catchError, filter, map, Observable, of, Subject, switchMap, takeUntil, tap, throwError} from "rxjs";
 import {QuestionsInterface} from "../../../interfaces/questionsInterface";
-import {AnswerWriterComponent} from "../answer-writer/answer-writer.component";
+import {AnswerWriterComponent} from "../../partials/answer-writer/answer-writer.component";
 
 @Component({
   selector: 'app-question-details',
