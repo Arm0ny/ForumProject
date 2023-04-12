@@ -100,6 +100,7 @@ class QuestionController extends Controller
         $data = Question::query()
             ->with(['user', 'category'])
             ->where("category_id", "=", $categoryId)
+            ->orderBy('id', 'desc')
             ->cursorPaginate(10);
 
         $count = Question::query()
@@ -116,6 +117,7 @@ class QuestionController extends Controller
         $data =  Question::query()
             ->with(['user', 'category'])
             ->where('questions.title','like', '%'.$partial.'%')
+            ->orderBy('id', 'desc')
             ->cursorPaginate(10);
 
         $count = Question::query()

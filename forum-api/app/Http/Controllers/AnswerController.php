@@ -17,6 +17,7 @@ class AnswerController extends Controller
     {
         return Answer::query()
             ->with('user')
+            ->orderBy('id', 'desc')
             ->get();
     }
 
@@ -82,6 +83,7 @@ class AnswerController extends Controller
         return Answer::query()
             ->with(['user'])
             ->where('question_id', '=', $questionId)
+            ->orderBy('id', 'desc')
             ->get();
 
     }
