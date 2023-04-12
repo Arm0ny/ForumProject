@@ -28,7 +28,8 @@ export class EditorWriterComponent implements OnDestroy {
     content: '',
     id: 0,
     points: 0,
-    title: ''
+    title: '',
+    category : {id: 0, name: ''}
   };
 
   writerForm = new FormGroup({
@@ -38,6 +39,7 @@ export class EditorWriterComponent implements OnDestroy {
   });
 
   ngOnInit() {
+    console.log(this.question)
     this.writerForm.setValue({
       title: this.question.title,
       category: this.question.category!.id,

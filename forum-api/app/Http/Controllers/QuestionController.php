@@ -17,7 +17,9 @@ class QuestionController extends Controller
     public function index()
     {
         $data = Question::query()
-            ->with(['user', 'category'])->cursorPaginate(10);
+            ->with(['user', 'category'])
+            ->orderBy('id', 'desc')
+            ->cursorPaginate(10);
 
         $count = Question::query()
             ->count();
