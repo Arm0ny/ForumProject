@@ -17,7 +17,7 @@
       </span>
     <button routerLink="/logout" class="shadow p-4 bg-secondary rounded hover:bg-secondary-hover transition duration-300"><img src="assets/img/icons/logout_black_24dp.svg" alt="Logout"/></button>
     </header>
-      <ng-template #logInBlock><a routerLink="/login">Log In!</a></ng-template>
+      <ng-template #logInBlock><a routerLink="/login" class=" mr-auto py-2 px-4 bg-accent text-secondary rounded hover:bg-accent-hover transition duration-300">Log In!</a></ng-template>
 
     <header class="font-primary text-bold text-lg text-center"><h1>{{apiResponse.count}} Posts</h1></header>
 
@@ -36,7 +36,7 @@
   <section class="hidden lg:block lg:w-1/5 flex flex-col justify-center">
     <header *ngIf="activeUser$ | async" class="flex justify-end items-center mb-2">
     </header>
-    <a routerLink="/editor" class="flex justify-center text-center py-4 w-full bg-accent text-secondary font-secondary font-medium rounded mb-16 hover:bg-accent-hover">+ Create new Question</a>
+    <a routerLink="/editor" class="flex justify-center text-center py-4 w-full bg-accent text-secondary font-secondary font-medium rounded mb-16 hover:bg-accent-hover transition duration-300">+ Create new Question</a>
     <app-users-ranking></app-users-ranking>
   </section>
 </main>

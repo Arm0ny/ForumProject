@@ -28,7 +28,7 @@ export class EditorWriterComponent implements OnDestroy {
     content: '',
     id: 0,
     points: 0,
-    title: '',
+    title: ''
   };
 
   writerForm = new FormGroup({

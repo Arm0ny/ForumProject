@@ -46,7 +46,7 @@ class QuestionController extends Controller
     public function show($id)
     {
         return Question::query()
-            ->with('user')
+            ->with('user', 'category')
             ->find($id);
 
     }
