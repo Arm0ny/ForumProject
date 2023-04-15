@@ -77,30 +77,8 @@
 </details>
 
 
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * [![Angular][Angular.io]][Angular-url]
 * [![Laravel][Laravel.com]][Laravel-url]
@@ -171,6 +149,8 @@ _Below is an example of how you can instruct your audience on installing and set
 
 ### Environment Setup
 
+#### Back-end environment
+
 to correctly run the application you need to setup some Laravel environment variables inside the forum-api folder
 1. create a new .env file inside the forum-api directory
 2. copy and paste the content from the .env.example
@@ -194,39 +174,46 @@ to correctly run the application you need to setup some Laravel environment vari
     SANCTUM_STATEFUL_DOMAINS=127.0.0.1:4200 //the angular front-end URL
     
     ```
-6. run migrations:
+6. generate an application key:
+    ```shell
+   php artisan key:generate
+    ```
+   
+7. run migrations:
     ```shell
     php artisan migrate
     ```
    this will create the databases tables and set up the back-end of the application
 
+#### Front-end environment
+now we need to do a few steps to make sure the correct back-end url is configured inside the front-end environment
+
+1. Go to the front-end library
+2. open the src/environments folder
+3. search for the development folder
+4. inside it you should find environment.development.ts file
+5. change this line to your back-end url
+    ```
+    BACKEND_URL : 'your back end url'
+    ```
+   
+### Serving the application
+
+you are don!, now you only need to run two commands to run the application locally:
+1. inside forum-api
+    ```shell
+      php artisan serve
+    ```
+2.  inside forum front-end
+    ```shell
+    ng serve
+    ```
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/Arm0ny/ForumProject/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
