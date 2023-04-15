@@ -12,12 +12,13 @@ import { QuestionsInterface } from '../interfaces/questionsInterface';
 import { AuthService } from './auth/auth.service';
 import { ApiResponseInterface } from '../interfaces/api-response-interface';
 import { CategoriesInterface } from '../interfaces/categories-interface';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionsService {
-  baseUrl = 'http://127.0.0.1:8000/api/questions';
+  baseUrl = environment.BACKEND_URL + '/api/questions';
   apiBehavior$ = new BehaviorSubject<ApiResponseInterface>({
     data: [],
     next_cursor: '',

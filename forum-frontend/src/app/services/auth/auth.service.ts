@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, } from '@angular/common/http';
 import {Observable, switchMap} from 'rxjs';
 import { UserInterface } from '../../interfaces/user-interface';
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = 'http://127.0.0.1:8000';
+  baseUrl = environment.BACKEND_URL;
   isAuthenticated$ = this.isAuthenticated();
   private activeUser$ = this.getUser();
 

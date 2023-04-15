@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {AuthService} from "./auth/auth.service";
 import {catchError, Observable, of, ReplaySubject, switchMap} from "rxjs";
 import {AnswersInterface} from "../interfaces/answers-interface";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnswersService {
   private answersSubject$ = new ReplaySubject<AnswersInterface[]>(1);
-  baseUrl = 'http://127.0.0.1:8000/api/answer';
+  baseUrl = environment.BACKEND_URL + '/api/answer';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
