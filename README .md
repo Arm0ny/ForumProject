@@ -194,6 +194,12 @@ to correctly run the application you need to setup some Laravel environment vari
     SANCTUM_STATEFUL_DOMAINS=127.0.0.1:4200 //the angular front-end URL
     
     ```
+6. run migrations:
+    ```shell
+    php artisan migrate
+    ```
+   this will create the databases tables and set up the back-end of the application
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
