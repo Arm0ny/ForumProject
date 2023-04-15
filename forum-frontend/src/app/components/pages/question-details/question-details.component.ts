@@ -3,9 +3,8 @@ import { QuestionsService } from '../../../services/questions.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { AnswersService } from '../../../services/answers.service';
 import { AuthService } from '../../../services/auth/auth.service';
-import {catchError, filter, map, Observable, of, Subject, switchMap, takeUntil, tap, throwError} from "rxjs";
-import {QuestionsInterface} from "../../../interfaces/questionsInterface";
-import {AnswerWriterComponent} from "../../partials/answer-writer/answer-writer.component";
+import {catchError, Subject, switchMap, takeUntil, tap, throwError} from "rxjs";
+
 
 @Component({
   selector: 'app-question-details',

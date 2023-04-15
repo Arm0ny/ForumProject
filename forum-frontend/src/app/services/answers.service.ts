@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {AuthService} from "./auth/auth.service";
 import {catchError, Observable, of, ReplaySubject, switchMap} from "rxjs";
 import {AnswersInterface} from "../interfaces/answers-interface";
-import {QuestionsInterface} from "../interfaces/questionsInterface";
 
 @Injectable({
   providedIn: 'root',

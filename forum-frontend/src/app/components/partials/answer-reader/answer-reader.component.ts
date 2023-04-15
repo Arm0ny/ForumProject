@@ -3,7 +3,7 @@ import {AnswersInterface} from "../../../interfaces/answers-interface";
 import {UserInterface} from "../../../interfaces/user-interface";
 import {AuthService} from "../../../services/auth/auth.service";
 import {AnswersService} from "../../../services/answers.service";
-import {catchError, Subject, takeUntil} from "rxjs";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-answer-reader',

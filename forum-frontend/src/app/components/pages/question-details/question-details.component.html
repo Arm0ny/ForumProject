@@ -2,7 +2,7 @@
   <section class="flex flex-col gap-10 font-primary">
     <header *ngIf="question.user" class="shadow p-4 flex gap-2 justify-center items-center bg-secondary rounded">
       <h1>Posted By: {{question.user.name}}</h1>
-      <img [src]="'/profile-images/' + question.user.profile_image | getDownloadURL" alt=""/>
+      <img [src]="'/profile-images/' + question.user.profile_image | getDownloadURL" alt="" class="h-8 w-8 rounded-full"/>
     </header>
     <article *ngIf="question" class="flex flex-col bg-secondary rounded p-6 gap-6">
       <ng-container *ngIf="!editMode else editor">

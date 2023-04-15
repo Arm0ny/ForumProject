@@ -3,7 +3,6 @@ import {AnswersService} from "../../../services/answers.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subject, takeUntil} from "rxjs";
-import {UserInterface} from "../../../interfaces/user-interface";
 import {AnswersInterface} from "../../../interfaces/answers-interface";
 
 @Component({

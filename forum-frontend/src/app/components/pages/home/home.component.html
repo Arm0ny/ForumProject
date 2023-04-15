@@ -13,7 +13,7 @@
     <header *ngIf="activeUser$ | async as activeUser else logInBlock" class="flex justify-between">
       <span routerLink="/profile" class="shadow flex gap-2 justify-center items-center font-primary bg bg-secondary rounded p-4 hover:cursor-pointer hover:bg-secondary-hover transition duration-300">
         <p>Logged in as <strong>{{activeUser.name}}</strong></p>
-        <img [src]="'/profile-images/' + activeUser.profile_image | getDownloadURL" alt="profile-image" class="h-8 w-8"/>
+        <img [src]="'/profile-images/' + activeUser.profile_image | getDownloadURL" alt="profile-image" class="h-8 w-8 rounded-full"/>
       </span>
     <button routerLink="/logout" class="shadow p-4 bg-secondary rounded hover:bg-secondary-hover transition duration-300"><img src="assets/img/icons/logout_black_24dp.svg" alt="Logout"/></button>
     </header>

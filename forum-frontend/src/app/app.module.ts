@@ -39,6 +39,7 @@ import { LogoutComponent } from './components/auth/logout/logout.component';
 import { SearchbarComponent } from './components/partials/searchbar/searchbar.component';
 import { UserDetailsComponent } from './components/pages/user-details/user-details.component';
 import {MatIconModule} from "@angular/material/icon";
+import {NgOptimizedImage} from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +76,7 @@ import {MatIconModule} from "@angular/material/icon";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     MatIconModule,
+    NgOptimizedImage,
   ],
   providers: [
     {

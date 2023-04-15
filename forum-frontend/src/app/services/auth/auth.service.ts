@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {BehaviorSubject, Observable, ReplaySubject, switchMap} from 'rxjs';
+import { HttpClient, } from '@angular/common/http';
+import {Observable, switchMap} from 'rxjs';
 import { UserInterface } from '../../interfaces/user-interface';
 
 @Injectable({
