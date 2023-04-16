@@ -25,11 +25,11 @@
       class="bg-secondary flex p-4 rounded max-h-1/4 cursor-pointer hover:bg-secondary-hover transition duration-300">
     </app-question>
     <span class="flex w-full items-center justify-center gap-6">
-      <button (click)="changePage('prev')" [disabled]="hasPage(apiResponse.prev_cursor)" class="p-4 bg-[#DAE0FF] disabled:bg-none rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="previous" class="h-4 w-4 rotate-180" /></button>
-      <button (click)="changePage('next')" [disabled]="hasPage(apiResponse.next_cursor)" class="p-4 bg-[#DAE0FF] disabled:bg-none rounded"><img [src]="'/icons/arrow.png' |  getDownloadURL" alt="next" class="h-4 w-4" /></button>
+      <button (click)="changePage('prev')" [disabled]="hasPage(apiResponse.prev_cursor)" class="p-4 bg-[#DAE0FF] disabled:bg-none rounded"><img src="assets/img/icons/arrow.png" alt="previous" class="h-4 w-4" /></button>
+      <button (click)="changePage('next')" [disabled]="hasPage(apiResponse.next_cursor)" class="p-4 bg-[#DAE0FF] disabled:bg-none rounded"><img src="assets/img/icons/arrow.png" alt="next" class="h-4 w-4 rotate-180" /></button>
     </span>
     <a routerLink="/editor" class=" lg:hidden fixed bottom-10 right-6 p-2 w-20 h-20 rounded-full bg-[#4361EE]">
-      <img [src]="'/icons/plus-button.svg' | getDownloadURL" alt="Ask Question"/>
+      <img src="assets/img/icons/plus-button.svg" alt="Ask Question"/>
     </a>
   </section>
 
