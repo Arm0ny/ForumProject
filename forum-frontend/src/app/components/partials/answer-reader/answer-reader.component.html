@@ -11,7 +11,7 @@
     </span>
   </header>
 
-  <div *ngIf="!editMode else editBlock" [innerHTML]="answer.content | markdownPipe" class=" font-primary font-normal"></div>
+  <div *ngIf="!editMode else editBlock" [innerHTML]="answer.content | markdownPipe" class=" font-primary font-normal leading-7"></div>
   <ng-template #editBlock>
     <app-answer-writer [action]="'edit'" [answer]="answer"></app-answer-writer>
   </ng-template>
