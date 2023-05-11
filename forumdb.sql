@@ -1,5 +1,7 @@
 -- MySQL dump 10.13  Distrib 8.0.31, for macos12.6 (x86_64)
 --
+CREATE SCHEMA forumDB;
+USE forumDB
 -- Host: localhost    Database: forumDB
 -- ------------------------------------------------------
 -- Server version	8.0.31
