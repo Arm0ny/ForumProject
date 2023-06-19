@@ -1,7 +1,7 @@
 <main class="px-6 w-full h-screen flex flex-col items-center justify-center lg:w-1/2 m-auto">
   <app-error-message *ngIf="error" [key]="error"></app-error-message>
   <div class="container flex flex-col bg-secondary gap-6 p-6 rounded">
-    <header class="text-center">Login</header>
+    <header class="text-center">Sign-in</header>
     <form
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit()"
@@ -24,12 +24,12 @@
       <span class="flex gap-4 justify-between items-center w-full md:w-1/2">
         <a
           class=""
-          routerLink="/register"
+          routerLink="/sign-up"
         >
-          Register
+          Sign-up
         </a>
         <button type="submit" class="p-4 bg-accent rounded text-secondary">
-          Login
+          Sign-in
         </button></span
       >
     </form>

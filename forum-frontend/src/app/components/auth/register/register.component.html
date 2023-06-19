@@ -1,7 +1,7 @@
 <main class="px-6 w-full h-screen flex flex-col items-center justify-center lg:w-1/2 m-auto">
   <app-error-message *ngIf="error" [key]="error"></app-error-message>
   <div class="container flex flex-col bg-secondary gap-6 p-6 rounded">
-    <header class="text-center">Register</header>
+    <header class="text-center">Sign-up</header>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6 justify-center items-center p-6">
       <input type="text" formControlName="name" required placeholder="Username" class="py-4 px-4 rounded-full bg-[#F4F6FF] shadow-inner">
       <app-error-message *ngIf="username && username.invalid && (username.dirty || username.touched)" [key]="'username' "></app-error-message>
@@ -14,7 +14,7 @@
       <app-error-message *ngIf="password_confirmation && password_confirmation.invalid && (password_confirmation.dirty || password_confirmation.touched)" [key]="'password' "></app-error-message>
 
       <span class="flex justify-between items-center w-full md:w-1/2">
-        <a routerLink="/login">Login</a>
+        <a routerLink="/sign-in">Sign-in</a>
         <button type="submit"  class=" p-4  bg-[#3D5AF1] rounded text-secondary">Done !</button>
       </span>
     </form>

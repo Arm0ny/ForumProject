@@ -11,8 +11,8 @@ import {LoggedInGuard} from "./guards/logged-in.guard";
 import {LogoutComponent} from "./components/auth/logout/logout.component";
 import {UserDetailsComponent} from "./components/pages/user-details/user-details.component";
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [LoggedInGuard] },
+  { path: 'sign-in', component: LoginComponent, canActivate: [LoggedInGuard] },
+  { path: 'sign-up', component: RegisterComponent, canActivate: [LoggedInGuard] },
   { path: '', component: HomeComponent },
   { path: 'questions/:id', component: QuestionDetailsComponent },
   { path: 'editor', component: EditorDetailsComponent, canActivate: [AuthGuard] },

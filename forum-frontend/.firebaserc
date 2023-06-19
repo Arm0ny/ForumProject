@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "myforum-a6632"
+  },
+  "targets": {
+    "myforum-a6632": {
+      "hosting": {
+        "forum-frontend": [
+          "myforum-a6632"
+        ]
+      }
+    }
   }
 }
